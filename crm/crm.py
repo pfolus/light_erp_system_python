@@ -75,8 +75,8 @@ def show_table(table):
     """
 
     # your code
-
     pass
+
 
 
 def add(table):
@@ -90,7 +90,11 @@ def add(table):
         Table with a new record
     """
 
-    # your code
+    list_labels = ['name', 'email', 'Is she/he subscribed to the newsletter? [1/0]']
+    inputs = ui.get_inputs(list_labels, title)
+    inputs = inputs.insert(0, common.generate_random())
+
+    table = table.append(inputs)
 
     return table
 
@@ -137,15 +141,27 @@ def update(table, id_):
 # return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
 
-    # your code
+    longest_name = ''
+    for item in table:
+        if len(item[1]) >= len(longest_name):
+            longest_name = item[1]
+            longest_name_id = item[0]
+    
+    print(longest_name_id)
+    return longest_name_id
 
-    pass
 
 
 # the question: Which customers has subscribed to the newsletter?
 # return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
 
-    # your code
+    subscription_list = []
+    for item in table:
+        if item[3] == '1':
+            single_subscription = item[2] + ' ; ' + item[1]
+            subscription_list.append(single_subscription)
 
-    pass
+    return subscription_list
+
+
