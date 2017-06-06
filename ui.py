@@ -36,6 +36,7 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
+    print()
     print(label + ":")
     if type(result) == str:
         print(result)
@@ -44,6 +45,7 @@ def print_result(result, label):
     elif type(result) == dict:
         for key, value in result.items():
             print(str(key) + ": " + str(value))
+    print()
 
 
 def print_menu(title, list_options, exit_message):
@@ -73,6 +75,7 @@ def print_menu(title, list_options, exit_message):
         print("{:>7}".format('(' + str(counter) + ')') + " {}".format(option))
         counter += 1
     print("{:>7}".format('(0)') + " {}".format(exit_message))
+    print()
 
 
 def get_inputs(list_labels, title):
@@ -118,4 +121,6 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
+    print()
     print("Error: ", message)
+    print()
