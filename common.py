@@ -32,6 +32,7 @@ def generate_random(table):
     generated = random.choice(id_list)
 
     while generated in id_list:
+        generated = ""
         for i in range(0, 2):
             generated += random.choice(special)
             generated += random.choice(upper)
