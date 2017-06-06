@@ -15,6 +15,35 @@ import data_manager
 import common
 
 
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id_)
+    elif option == "4":
+        update(table, id_)
+    elif option == "5":
+        get_oldest_person(table)
+    elif option == "6":
+        get_persons_closest_to_average(table)
+    return option
+
+
+def handle_menu():
+    options = ["Show table",
+               "Add person",
+               "Remove person",
+               "Update person info",
+               "Get oldest person",
+               "Get person closest to average age"]
+
+    ui.print_menu("Human resources manager", options, "Exit to menu")
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -24,10 +53,14 @@ def start_module():
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    table = get_table_from_file("persons.csv")
+    option = ""
+    while option != "0":
+        handle_menu()
+        try:
+            option = choose(table)
+        except KeyError as err:
+            ui.print_error_message(err)
 
 
 def show_table(table):
