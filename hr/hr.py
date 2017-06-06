@@ -23,6 +23,7 @@ def choose(table):
     elif option == "2":
         table = add(table)
     elif option == "3":
+        id_ = ui.get_inputs(["Enter person's id: "], "")
         table = remove(table, id_)
     elif option == "4":
         table = update(table, id_)
@@ -88,8 +89,10 @@ def add(table):
         Table with a new record
     """
 
-    # your code
-
+    inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+    id_ = common.generate_random(table)
+    inputs.insert(0, id_)
+    table.append(inputs)
     return table
 
 
@@ -105,8 +108,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
-
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
     return table
 
 
