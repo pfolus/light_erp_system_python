@@ -21,19 +21,17 @@ def choose(table):
     if option == "1":
         show_table('table')
     elif option == "2":
-        add(table)
+        table = add(table)
     elif option == "3":
-        remove(table, id_)
+        table = remove(table, id_)
     elif option == "4":
-        update(table, id_)
+        table = update(table, id_)
     elif option == "5":
         get_longest_name_id(table)
     elif option == "6":
         get_subscribed_emails(table)
-    else:
-        raise KeyError("There is no such option.")
     
-    return option
+    return table, option
 
 
 def handle_menu():
@@ -60,10 +58,9 @@ def start_module():
     option = ""
     while option != "0":
         handle_menu()
-        try:
-            option = choose(table)
-        except KeyError as err:
-            ui.print_error_message(err)
+        table, option = choose(table)
+    data_manager.write_table_to_file("crm/customers.csv", table)
+
 
 
 def show_table(table):
