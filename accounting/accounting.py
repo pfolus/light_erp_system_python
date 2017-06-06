@@ -157,9 +157,19 @@ def update(table, id_):
 # return the answer (number)
 def which_year_max(table):
 
-    # your code
+    profit_years = []
+    year_max = 0
+    biggest_profit = 0
 
-    pass
+    for item in table:
+        if item[4] == 'in':
+            profit_years.append(item)
+
+    for item in profit_years:
+        if int(item[5]) > biggest_profit:
+            year_max = item[3]
+
+    return year_max
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
