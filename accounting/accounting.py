@@ -96,7 +96,6 @@ def add(table):
     Returns:
         Table with a new record
     """
-#  # # # # ## # # ## # # # # # # # # #  TO DO
 
     data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
 
@@ -139,8 +138,14 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            index = table.index(item)
+            inputs = ui.get_inputs(data_names, ('Change data of %s record:' % id_[0]))
+            inputs.insert(0, id_[0])
+            table[index] = inputs
 
     return table
 
