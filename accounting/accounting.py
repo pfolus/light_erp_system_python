@@ -116,8 +116,10 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
-
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
+            
     return table
 
 
