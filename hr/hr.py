@@ -15,7 +15,7 @@ import data_manager
 import common
 
 
-def choose():
+def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -53,14 +53,11 @@ def start_module():
     Returns:
         None
     """
-    table = get_table_from_file("persons.csv")
+    table = data_manager.get_table_from_file("hr/persons.csv")
     option = ""
     while option != "0":
         handle_menu()
-        try:
-            option = choose(table)
-        except KeyError as err:
-            ui.print_error_message(err)
+        option = choose(table)
 
 
 def show_table(table):

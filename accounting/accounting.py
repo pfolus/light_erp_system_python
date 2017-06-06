@@ -38,7 +38,7 @@ def start_module():
 
 
 def handle_menu():
-    
+
     menu_name = 'Accounting Manager:'
     menu_options = ['Show records', 'Add a record',
                     'Remove a record', 'Update a record',
