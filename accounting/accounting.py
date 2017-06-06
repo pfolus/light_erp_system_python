@@ -26,13 +26,13 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file('items.csv')
+    table = data_manager.get_table_from_file('accounting/items.csv')
 
     option = ""
     while option != "0":
         handle_menu()
         try:
-            option = choose(table)
+            option = choose()
         except KeyError as err:
             ui.print_error_message(err)
 
@@ -65,6 +65,8 @@ def choose():
     elif option == "6":
         year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
         avg_amount(table, year)
+    elif option == "0":
+        return option
     else:
         raise KeyError("There is no such option.")
     return option
