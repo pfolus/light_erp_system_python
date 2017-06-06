@@ -32,7 +32,7 @@ def start_module():
     while option != "0":
         handle_menu()
         try:
-            option = choose()
+            option = choose(table)
         except KeyError as err:
             ui.print_error_message(err)
 
@@ -47,7 +47,7 @@ def handle_menu():
     ui.print_menu(menu_name, menu_options, 'Exit to menu')
 
 
-def choose():
+def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
