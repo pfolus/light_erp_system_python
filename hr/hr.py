@@ -29,9 +29,11 @@ def choose(table):
         id_ = ui.get_inputs(["Enter person's id: "], "")
         table = update(table, id_)
     elif option == "5":
-        get_oldest_person(table)
+        result = get_oldest_person(table)
+        ui.print_result(result, "Oldest people")
     elif option == "6":
-        get_persons_closest_to_average(table)
+        result = get_persons_closest_to_average(table)
+        ui.print_result(result, "People closest to the average age")
     return table, option
 
 
@@ -145,6 +147,7 @@ def get_oldest_person(table):
 
     sorted_years = common.bubble_sort([item[2] for item in table])
     oldest_people = [item[1] for item in table if item[2] == sorted_years[0]]
+
     return oldest_people
 
 
