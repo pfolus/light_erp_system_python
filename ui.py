@@ -36,9 +36,14 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
-    # your code
-
-    pass
+    print(label + ":")
+    if type(result) == str:
+        print(result)
+    elif type(result) == list:
+        print("\n".join(result))
+    elif type(result) == dict:
+        for key, value in result.items():
+            print(str(key) + ": " + str(value))
 
 
 def print_menu(title, list_options, exit_message):
