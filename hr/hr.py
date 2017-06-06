@@ -135,8 +135,9 @@ def update(table, id_):
 def get_oldest_person(table):
 
     sorted_years = common.bubble_sort([item[2] for item in table])
-    for person[2] in table:
-        if person[2] == 
+    oldest_people = [item[1] for item in table if item[2] == sorted_years[0]]
+    print(oldest_people)
+
 
 
 # the question: Who is the closest to the average age ?
