@@ -66,10 +66,7 @@ def choose(table):
     elif option == "6":
         year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
         avg_amount(table, year)
-    elif option == "0":
-        return table, option
-    else:
-        raise KeyError("There is no such option.")
+
     return table, option
 
 
@@ -99,8 +96,15 @@ def add(table):
     Returns:
         Table with a new record
     """
+#  # # # # ## # # ## # # # # # # # # #  TO DO
 
-    # your code
+    data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
+
+    inputs = ui.get_inputs(data_names, 'Adding new record:')
+
+    id_ = common.generate_random(table)
+    inputs.insert(0, id_)
+    table.append(inputs)
 
     return table
 

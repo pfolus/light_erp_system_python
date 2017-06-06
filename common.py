@@ -22,7 +22,36 @@ def generate_random(table):
     """
 
     generated = ''
+    special = '!"#$%&()*+,-./:<=>?@^_{|}'
+    upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    lower = 'abcdefghijklmnopqrstuvwxyz'
+    digits = '0123456789'
 
-    # your code
+    id_list = []
+    for item in table:
+        id_list.append(item[0])
+
+    while generated in id_list:
+        for i in range(0, 2):
+            generated += random.choice(special)
+            generated += random.choice(upper)
+            generated += random.choice(lower)
+            generated += random.choice(digits)
+        generated = ''.join(random.sample(generated, len(generated)))
 
     return generated
+
+
+def bubble_sort(numbers):
+    n = len(numbers)
+    replaces = True
+    while replaces:
+        replaces = False
+        for i in range(1, n):
+            if numbers[i-1] > numbers[i]:
+                temp = numbers[i]
+                numbers[i] = numbers[i-1]
+                numbers[i-1] = temp
+                replaces = True
+        n -= 1
+    return numbers
