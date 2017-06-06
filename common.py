@@ -26,3 +26,18 @@ def generate_random(table):
     # your code
 
     return generated
+
+
+def bubble_sort(numbers):
+    n = len(numbers)
+    replaces = True
+    while replaces:
+        replaces = False
+        for i in range(1, n):
+            if numbers[i-1] > numbers[i]:
+                temp = numbers[i]
+                numbers[i] = numbers[i-1]
+                numbers[i-1] = temp
+                replaces = True
+        n -= 1
+    return numbers

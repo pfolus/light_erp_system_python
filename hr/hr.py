@@ -55,7 +55,7 @@ def start_module():
     """
     table = data_manager.get_table_from_file("hr/persons.csv")
     option = ""
-    while option != "0:
+    while option != "0":
         handle_menu()
         table, option = choose(table)
     data_manager.write_table_to_file("hr/persons.csv", table)
@@ -134,9 +134,9 @@ def update(table, id_):
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
 
-    # your code
-
-    pass
+    sorted_years = common.bubble_sort([item[2] for item in table])
+    for person[2] in table:
+        if person[2] == 
 
 
 # the question: Who is the closest to the average age ?

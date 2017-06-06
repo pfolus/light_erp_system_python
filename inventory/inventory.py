@@ -17,6 +17,35 @@ import data_manager
 import common
 
 
+def choose(table):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        table = add(table)
+    elif option == "3":
+        table = remove(table, id_)
+    elif option == "4":
+        table = update(table, id_)
+    elif option == "5":
+        get_available_items(table)
+    elif option == "6":
+        get_average_durability_by_manufacturers(table)
+    return table, option
+
+
+def handle_menu():
+    options = ["Show table",
+               "Add console",
+               "Remove console",
+               "Update console info",
+               "Get available consoles",
+               "Get average durability of consoles"]
+
+    ui.print_menu("Inventory manager", options, "Exit to menu")
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -26,8 +55,12 @@ def start_module():
     Returns:
         None
     """
-
-    pass
+    table = data_manager.get_table_from_file("inventory/inventory.csv")
+    option = ""
+    while option != "0":
+        handle_menu()
+        table, option = choose(table)
+    data_manager.write_table_to_file("inventory/inventory.csv", table)
 
 
 def show_table(table):
