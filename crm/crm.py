@@ -15,6 +15,38 @@ import data_manager
 # common module
 import common
 
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table('table')
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        remove(table, id_)
+    elif option == "4":
+        update(table, id_)
+    elif option == "5":
+        get_longest_name_id(table)
+    elif option == "6":
+        get_subscribed_emails(table)
+    else:
+        raise KeyError("There is no such option.")
+    
+    return option
+
+
+def handle_menu():
+    options = ["Show table",
+               "Add",
+               "Remove",
+               "Update",
+               "Get longest name id",
+               "Get subscribed emails(table)",
+               "Return to main menus"]
+
+    ui.print_menu("Customer Relationship Management", options, "Exit program")
+
 
 def start_module():
     """
@@ -26,9 +58,12 @@ def start_module():
         None
     """
 
-    # your code
-
-    pass
+    while True:
+        handle_menu()
+        try:
+            choose()
+        except KeyError as err:
+            ui.print_error_message(err)
 
 
 def show_table(table):
