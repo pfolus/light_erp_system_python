@@ -19,7 +19,7 @@ def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
-        show_table('table')
+        show_table(table)
     elif option == "2":
         table = add(table)
     elif option == "3":
@@ -27,9 +27,9 @@ def choose(table):
     elif option == "4":
         table = update(table, id_)
     elif option == "5":
-        get_longest_name_id(table)
+        longest_name_id = get_longest_name_id(table)
     elif option == "6":
-        get_subscribed_emails(table)
+        subscription_list = get_subscribed_emails(table)
     
     return table, option
 
@@ -89,12 +89,15 @@ def add(table):
     Returns:
         Table with a new record
     """
+    generated = common.generate_random(table)
 
-    list_labels = ['name', 'email', 'Is she/he subscribed to the newsletter? [1/0]']
-    inputs = ui.get_inputs(list_labels, title)
-    inputs = inputs.insert(0, common.generate_random())
+    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    inputs = ui.get_inputs(list_labels, 'Provide data: ')
+    inputs.insert(0, generated)
 
-    table = table.append(inputs)
+
+    print(inputs)
+    table.append(inputs)
 
     return table
 
@@ -147,7 +150,7 @@ def get_longest_name_id(table):
             longest_name = item[1]
             longest_name_id = item[0]
     
-    print(longest_name_id)
+    print(longest_name_id) # TO REMOVE
     return longest_name_id
 
 
@@ -162,6 +165,7 @@ def get_subscribed_emails(table):
             single_subscription = item[2] + ' ; ' + item[1]
             subscription_list.append(single_subscription)
 
+    print('\n'.join(subscription_list)) # TO REMOVE
     return subscription_list
 
 
