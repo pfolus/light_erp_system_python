@@ -15,22 +15,22 @@ import data_manager
 import common
 
 
-def choose():
+def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
         show_table(table)
     elif option == "2":
-        add(table)
+        table = add(table)
     elif option == "3":
-        remove(table, id_)
+        table = remove(table, id_)
     elif option == "4":
-        update(table, id_)
+        table = update(table, id_)
     elif option == "5":
         get_oldest_person(table)
     elif option == "6":
         get_persons_closest_to_average(table)
-    return option
+    return table, option
 
 
 def handle_menu():
@@ -53,14 +53,12 @@ def start_module():
     Returns:
         None
     """
-    table = get_table_from_file("persons.csv")
+    table = data_manager.get_table_from_file("hr/persons.csv")
     option = ""
     while option != "0":
         handle_menu()
-        try:
-            option = choose(table)
-        except KeyError as err:
-            ui.print_error_message(err)
+        table, option = choose(table)
+    data_manager.write_table_to_file("hr/persons.csv", table)
 
 
 def show_table(table):

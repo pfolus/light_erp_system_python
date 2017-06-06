@@ -32,9 +32,10 @@ def start_module():
     while option != "0":
         handle_menu()
         try:
-            option = choose(table)
+            table, option = choose(table)
         except KeyError as err:
             ui.print_error_message(err)
+    data_manager.write_table_to_file("accounting/items.csv", table)
 
 
 def handle_menu():
@@ -53,23 +54,23 @@ def choose(table):
     if option == "1":
         show_table(table)
     elif option == "2":
-        add(table)
+        table = add(table)
     elif option == "3":
         id_ = ui.get_inputs(['ID: '], 'Which record would you like to remove?')
-        remove(table, id_)
+        table = remove(table, id_)
     elif option == "4":
         id_ = ui.get_inputs(['ID: '], 'Which record would you like to update?')
-        update(table, id_)
+        table = update(table, id_)
     elif option == "5":
         which_year_max(table)
     elif option == "6":
         year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
         avg_amount(table, year)
     elif option == "0":
-        return option
+        return table, option
     else:
         raise KeyError("There is no such option.")
-    return option
+    return table, option
 
 
 def show_table(table):
@@ -116,7 +117,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
 
     return table
 
