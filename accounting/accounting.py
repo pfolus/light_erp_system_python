@@ -38,7 +38,7 @@ def start_module():
 
 
 def handle_menu():
-    
+
     menu_name = 'Accounting Manager:'
     menu_options = ['Show records', 'Add a record',
                     'Remove a record', 'Update a record',
@@ -55,15 +55,15 @@ def choose():
     elif option == "2":
         add(table)
     elif option == "3":
-        ui.get_inputs(list_labels, 'Which record would you like to remove?'
+        id_ = ui.get_inputs(['ID: '], 'Which record would you like to remove?')
         remove(table, id_)
     elif option == "4":
-        ui.get_inputs(list_labels, title)
+        id_ = ui.get_inputs(['ID: '], 'Which record would you like to update?')
         update(table, id_)
     elif option == "5":
         which_year_max(table)
     elif option == "6":
-        ui.get_inputs(list_labels, title)
+        year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
         avg_amount(table, year)
     else:
         raise KeyError("There is no such option.")
