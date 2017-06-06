@@ -96,7 +96,6 @@ def add(table):
     Returns:
         Table with a new record
     """
-#  # # # # ## # # ## # # # # # # # # #  TO DO
 
     data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
 
@@ -139,8 +138,14 @@ def update(table, id_):
     Returns:
         table with updated record
     """
+    data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            index = table.index(item)
+            inputs = ui.get_inputs(data_names, ('Change data of %s record:' % id_[0]))
+            inputs.insert(0, id_[0])
+            table[index] = inputs
 
     return table
 
@@ -152,15 +157,23 @@ def update(table, id_):
 # return the answer (number)
 def which_year_max(table):
 
-    # your code
+    profit_years = []
+    year_max = 0
+    biggest_profit = 0
 
-    pass
+    for item in table:
+        if item[4] == 'in':
+            profit_years.append(item)
+
+    for item in profit_years:
+        if int(item[5]) > biggest_profit:
+            year_max = item[3]
+
+    return year_max
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
 
-    # your code
-
-    pass
+    

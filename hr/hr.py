@@ -23,13 +23,17 @@ def choose(table):
     elif option == "2":
         table = add(table)
     elif option == "3":
+        id_ = ui.get_inputs(["Enter person's id: "], "")
         table = remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs(["Enter person's id: "], "")
         table = update(table, id_)
     elif option == "5":
-        get_oldest_person(table)
+        result = get_oldest_person(table)
+        ui.print_result(result, "Oldest people")
     elif option == "6":
-        get_persons_closest_to_average(table)
+        result = get_persons_closest_to_average(table)
+        ui.print_result(result, "People closest to the average age")
     return table, option
 
 
@@ -88,8 +92,10 @@ def add(table):
         Table with a new record
     """
 
-    # your code
-
+    inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+    id_ = common.generate_random(table)
+    inputs.insert(0, id_)
+    table.append(inputs)
     return table
 
 
@@ -105,8 +111,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
-
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
     return table
 
 
@@ -122,7 +129,11 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+            inputs.insert(0, id_[0])
+            table[table.index(item)] = inputs
 
     return table
 
@@ -136,6 +147,7 @@ def get_oldest_person(table):
 
     sorted_years = common.bubble_sort([item[2] for item in table])
     oldest_people = [item[1] for item in table if item[2] == sorted_years[0]]
+
     return oldest_people
 
 
