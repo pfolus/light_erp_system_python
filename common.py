@@ -25,13 +25,12 @@ def generate_random(table):
     lower = 'abcdefghijklmnopqrstuvwxyz'
     digits = '0123456789'
 
-
     id_list = []
     for item in table:
         id_list.append(item[0])
 
     generated = random.choice(id_list)
-    
+
     while generated in id_list:
         for i in range(0, 2):
             generated += random.choice(special)
