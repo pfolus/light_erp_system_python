@@ -130,7 +130,7 @@ def update(table, id_):
     for item in table:
         if item[0] == id_[0]:
             inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
-            inputs.insert(0, id_)
+            inputs.insert(0, id_[0])
             table[table.index(item)] = inputs
 
     return table
