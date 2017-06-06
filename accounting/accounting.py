@@ -176,4 +176,4 @@ def which_year_max(table):
 # return the answer (number)
 def avg_amount(table, year):
 
-    
+    pass
