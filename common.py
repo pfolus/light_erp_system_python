@@ -22,7 +22,10 @@ def generate_random(table):
     """
 
     generated = ''
-
+    special = '!"#$%&()*+,-./:;<=>?@^_`{|}'
+    upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    lower = 'abcdefghijklmnopqrstuvwxyz'
+    digits = '0123456789'
     # your code
 
     return generated
