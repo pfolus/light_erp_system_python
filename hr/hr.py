@@ -55,7 +55,7 @@ def start_module():
     """
     table = data_manager.get_table_from_file("hr/persons.csv")
     option = ""
-    while option != "0:
+    while option != "0":
         handle_menu()
         table, option = choose(table)
     data_manager.write_table_to_file("hr/persons.csv", table)
