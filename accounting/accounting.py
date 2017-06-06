@@ -17,7 +17,6 @@ import data_manager
 # common module
 import common
 
-
 def start_module():
     """
     Starts this module and displays its menu.
@@ -27,10 +26,48 @@ def start_module():
     Returns:
         None
     """
+    table = data_manager.get_table_from_file('items.csv')
 
-    # you code
+    option = ""
+    while option != "0":
+        handle_menu()
+        try:
+            option = choose(table)
+        except KeyError as err:
+            ui.print_error_message(err)
 
-    pass
+
+def handle_menu():
+    
+    menu_name = 'Accounting Manager:'
+    menu_options = ['Show records', 'Add a record',
+                    'Remove a record', 'Update a record',
+                    'Most profitable year', 'Average profit per item']
+
+    ui.print_menu(menu_name, menu_options, 'Exit to menu')
+
+
+def choose():
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        add(table)
+    elif option == "3":
+        ui.get_inputs(list_labels, 'Which record would you like to remove?'
+        remove(table, id_)
+    elif option == "4":
+        ui.get_inputs(list_labels, title)
+        update(table, id_)
+    elif option == "5":
+        which_year_max(table)
+    elif option == "6":
+        ui.get_inputs(list_labels, title)
+        avg_amount(table, year)
+    else:
+        raise KeyError("There is no such option.")
+    return option
 
 
 def show_table(table):
