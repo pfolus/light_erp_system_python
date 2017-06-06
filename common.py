@@ -22,11 +22,11 @@ def generate_random(table):
     """
 
     generated = ''
-    special = '!"#$%&()*+,-./:;<=>?@^_{|}'
+    special = '!"#$%&()*+,-./:<=>?@^_{|}'
     upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     lower = 'abcdefghijklmnopqrstuvwxyz'
     digits = '0123456789'
-    
+
     for item in table:
         while generated == item[0]:
             for i in range(0, 2):

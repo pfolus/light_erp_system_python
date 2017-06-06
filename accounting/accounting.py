@@ -97,14 +97,15 @@ def add(table):
         Table with a new record
     """
 #  # # # # ## # # ## # # # # # # # # #  TO DO
-    """ TO DO
+
     data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
 
-    ui.get_inputs(data_names, 'Adding new record:')
+    inputs = ui.get_inputs(data_names, 'Adding new record:')
 
     id_ = common.generate_random(table)
-    #table.append(id_)
-    """
+    inputs.insert(0, id_)
+    table.append(inputs)
+
     return table
 
 
