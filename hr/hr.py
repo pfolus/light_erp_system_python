@@ -26,6 +26,7 @@ def choose(table):
         id_ = ui.get_inputs(["Enter person's id: "], "")
         table = remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs(["Enter person's id: "], "")
         table = update(table, id_)
     elif option == "5":
         get_oldest_person(table)
@@ -126,7 +127,11 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+            inputs.insert(0, id_)
+            table[table.index(item)] = inputs
 
     return table
 
