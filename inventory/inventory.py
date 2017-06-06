@@ -27,8 +27,6 @@ def start_module():
         None
     """
 
-    # you code
-
     pass
 
 

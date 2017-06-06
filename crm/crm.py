@@ -15,7 +15,7 @@ import data_manager
 # common module
 import common
 
-def choose():
+def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -42,10 +42,9 @@ def handle_menu():
                "Remove",
                "Update",
                "Get longest name id",
-               "Get subscribed emails(table)",
-               "Return to main menus"]
+               "Get subscribed emails(table)",]
 
-    ui.print_menu("Customer Relationship Management", options, "Exit program")
+    ui.print_menu("Customer Relationship Management", options, "Return to menu")
 
 
 def start_module():
@@ -57,11 +56,12 @@ def start_module():
     Returns:
         None
     """
-
-    while True:
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    option = ""
+    while option != "0":
         handle_menu()
         try:
-            choose()
+            option = choose(table)
         except KeyError as err:
             ui.print_error_message(err)
 
