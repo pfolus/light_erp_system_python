@@ -135,9 +135,20 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-
-    # your code
-
+    list_labels = ["Name", "Manufacturer",
+                   "Purchase date", "Drurability"]
+    exists = False
+    for item in table:
+        if item[0] == id_[0]:
+            exists = True
+    if exists:
+        for i in range(len(table)):
+            if table[i][0] == id_[0]:
+                inputs = ui.get_inputs(list_labels, "Enter console info")
+                inputs.insert(0, id_[0])
+                table[i] = inputs
+    else:
+        ui.print_error_message("There isn't console with such ID!")
     return table
 
 
