@@ -184,7 +184,7 @@ def get_lowest_price_item_id(table):
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
     sold_items = []
-    table2 = copy.deepcopy(table)
+    table2 = table
 
 
     for item in table2:

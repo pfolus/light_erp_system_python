@@ -29,10 +29,37 @@ def print_table(table, title_list):
         This function doesn't return anything it only prints to console.
     """
 
-    # your goes code
+    header = ['|']
+    for item in title_list:
+        header.append('   ' + item + '   |')
+    #print(''.join(header))
+    printed_table = []
 
-    pass
+    width = 0
 
+    for item in title_list:
+        for i in item:
+            width += 1
+    upper_line = '-' * (width + 7 * len(title_list))
+    upper_line = list(upper_line)
+    upper_line[0] = '/'
+    upper_line.insert(-1, '-')
+    upper_line[-1] = '\\'
+
+
+    print("".join(upper_line))
+    print(''.join(header))
+
+    upper_line[0] = '|'
+    upper_line[-1] = '|'
+    print("".join(upper_line))
+
+    for item in table:
+        printed_table.append(item)
+
+
+    for elem in printed_table:
+        print('|'+"  |  ".join(elem)+'|')
 
 def print_result(result, label):
     """
