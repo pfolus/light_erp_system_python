@@ -33,9 +33,13 @@ def choose(table):
         result = get_counts_by_manufacturers(table)
         ui.print_result(result, 'Number of different games by each manufacturer')
     elif option == "6":
+        manufacturers = [item[2] for item in table]
         manufacturer = ui.get_inputs(['Manufacturer: '], 'Provide a manufacturer of a game: ')
-        result = get_average_by_manufacturer(table, manufacturer)
-        ui.print_result(str(result), 'Average games of provided manufacturer in stock')
+        if manufacturer[0] in manufacturers:
+            result = get_average_by_manufacturer(table, manufacturer[0])
+            ui.print_result(str(result), 'Average games of provided manufacturer in stock')
+        else:
+            ui.print_error_message("There isn't such manufacturer")
     return table, option
 
 
@@ -191,9 +195,10 @@ def get_average_by_manufacturer(table, manufacturer):
     games_counter = 0
     games_types = 0
     for item in table:
-        if item[2] == manufacturer[0]:
+        if item[2] == manufacturer:
             games_counter += int(item[4])
             games_types += 1
+
     average_amount = games_counter / games_types
 
     return average_amount

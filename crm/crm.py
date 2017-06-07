@@ -168,12 +168,12 @@ def get_longest_name_id(table):
 
     longest_name = ''
     for item in table:
-        if len(item[1]) >= len(longest_name):
+        if len(item[1]) > len(longest_name):
             longest_name = item[1]
             longest_name_id = item[0]
+        #elif len(item[1]) == len(longest_name):
 
     return longest_name_id
-
 
 
 # the question: Which customers has subscribed to the newsletter?
