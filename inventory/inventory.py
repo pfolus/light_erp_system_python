@@ -160,10 +160,8 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_items(table):
-
-    # your code
-
-    pass
+    differences_list = [2017 - int(item[3]) for item in table]
+    
 
 
 # the question: What are the average durability times for each manufacturer?

@@ -30,11 +30,12 @@ def choose(table):
         id_ = ui.get_inputs(['ID: '], 'Provide ID of a game you want to update: ')
         table = update(table, id_)
     elif option == "5":
-        get_counts_by_manufacturers(table)
+        result = get_counts_by_manufacturers(table)
+        ui.print_result(result, 'Number of different games by each manufacturer')
     elif option == "6":
         manufacturer = ui.get_inputs(['Manufacturer: '], 'Provide a manufacturer of a game: ')
-        get_average_by_manufacturer(table, manufacturer)
-    
+        result = get_average_by_manufacturer(table, manufacturer)
+        ui.print_result(str(result), 'Average games of provided manufacturer in stock')
     return table, option
 
 
@@ -187,6 +188,12 @@ def get_counts_by_manufacturers(table):
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
 
-    # your code
+    games_counter = 0
+    games_types = 0
+    for item in table:
+        if item[2] == manufacturer[0]:
+            games_counter += int(item[4])
+            games_types += 1
+    average_amount = games_counter / games_types
 
-    pass
+    return average_amount
