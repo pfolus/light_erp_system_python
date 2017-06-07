@@ -174,6 +174,7 @@ def get_lowest_price_item_id(table):
             lowest_price_item_id.append(item[0])
 
     if len(lowest_price_item_id) > 1:
+        lowest_price_item_id = common.get_max_number(lowest_price_item_id)
         return lowest_price_item_id
     else:
         return lowest_price_item_id
