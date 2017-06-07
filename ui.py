@@ -36,7 +36,6 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
-    print()
     print(label + ":")
     if type(result) == str:
         print(result)
@@ -121,6 +120,5 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
-    print()
     print("Error: ", message)
     print()
