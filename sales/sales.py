@@ -186,13 +186,54 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
     sold_items = []
 
-    date_from = ((int(year_from) - 1) * 365) + (int(month_from) * 30 + int(day_from))
-    date_to = ((int(year_to) - 1) * 365) + (int(month_to) * 30 + int(day_to))
+
+
+    #date_from = ((int(year_from) - 1) * 365) + (int(month_from) * 30 + int(day_from))
+    #date_to = ((int(year_to) - 1) * 365) + (int(month_to) * 30 + int(day_to))
+
 
     for item in table:
-        date = ((int(item[5]) - 1) * 365) + ((int(item[3]) * 30) + int(item[4]))
-        
-        if date >= date_from and date <= date_to:
-            sold_items.append(item)
+        game_year = int(item[5])
+        game_month = int(item[3])
+        game_day = int(item[4])
+        year_from, month_from, day_from = int(year_from), int(month_from), int(day_from)
+        year_to, month_to, day_to = int(year_to), int(month_to), int(day_to)
+        '''
+        if game_year >= year_from and game_year <= year_to:
+            if game_year != year_from and game_year!= year_to:
+                sold_items.append(item)
+            elif game_year == year_from: #rok gry rowny year_from
+                if game_month == month_from: #ten sam miesiac
+                    if game_day > day_from: #gra wydana tego samego dnia lub pozniej
+                        sold_items.append(item)
+                elif game_month > month_from: #gra wydana w pozniejszym miesiacu
+                    sold_items.append(item)
+            elif game_year == year_to:  #rok gry rowny year_to
+                if game_month == month_to: # ten sam miesiac
+                    if game_day < day_to: #gra wydana lub wczesniej
+                        sold_items.append(item)
+                if game_month < month_to: #miesiac mniejszy
+                    sold_items.append(item)
+        '''
+        if game_year >= year_from and game_year <= year_to:
+            if game_year != year_from and game_year != year_to:
+                sold_items.append(item)
+            elif game_year == year_from:
+                if game_month > month_from:
+                    if year_from == year_to:
+                        if game_month < month_to:
+                            sold_items.append(item)
+                    elif year_from != year_to:
+                        sold_items.append(item)
+                elif game_month == month_from:
+                    if game_day > day_from:
+                        sold_items.append(item)
+            elif game_year == year_to:
+                if game_month < month_to:
+                    sold_items.append(item)
+                elif game_month == month_to:
+                    if game_day < day_to:
+                        sold_items.append(item)
+    print(sold_items)
 
     return sold_items
