@@ -24,8 +24,10 @@ def choose(table):
     elif option == "2":
         table = add(table)
     elif option == "3":
+        id_ = ui.get_inputs(['ID: '], 'Provide ID of a game you want to remove: ')
         table = remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs(['ID: '], 'Provide ID of a game you want to update: ')
         table = update(table, id_)
     elif option == "5":
         get_counts_by_manufacturers(table)
@@ -55,12 +57,12 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file('crm/customers.csv')
+    table = data_manager.get_table_from_file('store/games.csv')
     option = ""
     while option != "0":
         handle_menu()
         table, option = choose(table)
-    data_manager.write_table_to_file("crm/customers.csv", table)
+    data_manager.write_table_to_file("store/games.csv", table)
 
 
 def show_table(table):
@@ -92,12 +94,9 @@ def add(table):
 
     generated = common.generate_random(table)
 
-    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    list_labels = ['Title: ', 'Manufacturer: ', 'Price: ', 'Number in stock: ']
     inputs = ui.get_inputs(list_labels, 'Provide data: ')
     inputs.insert(0, generated)
-
-
-    print(inputs)
     table.append(inputs)
 
     return table
@@ -115,7 +114,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
 
     return table
 
@@ -132,8 +133,14 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    list_labels = ['Title: ', 'Manufacturer: ', 'Price: ', 'Number in stock: ']
+    new_data = ui.get_inputs(list_labels, 'Enter customers new data: ')
+    new_data.insert(0, id_[0])
 
+    print(new_data)
+    for i in range(len(table)):
+        if table[i][0] == id_[0]:
+            table[i] = new_data
     return table
 
 
