@@ -61,16 +61,16 @@ def bubble_sort(numbers):
 def get_min_number(numbers):
     min_number = numbers[0]
     for i in range(1, len(numbers)):
-        if number[i] < min_number:
-            min_number = number[i]
+        if numbers[i] < min_number:
+            min_number = numbers[i]
     return min_number
 
 
 def get_max_number(numbers):
     max_number = numbers[0]
     for i in range(1, len(numbers)):
-        if number[i] > max_number:
-            max_number = number[i]
+        if numbers[i] > max_number:
+            max_number = numbers[i]
     return max_number
 
 
