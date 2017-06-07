@@ -64,7 +64,8 @@ def choose(table):
         id_ = ui.get_inputs(['ID: '], 'Which record would you like to update?')
         table = update(table, id_)
     elif option == "5":
-        get_lowest_price_item_id(table)
+        low_price_id = get_lowest_price_item_id(table)
+        ui.print_result(low_price_id, 'Item sold for the lowest price:')
     elif option == "6":
         inputs = ['Month from: ', 'Day from: ', 'Year from: ',
                   'Month to: ', 'Day to: ', 'Year to: ']
@@ -163,9 +164,22 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first by descending alphabetical order
 def get_lowest_price_item_id(table):
 
-    # your code
+    lowest_price = table[0][2]
+    print(lowest_price)
+    for item in table:
+        if item[2] < lowest_price:
+            lowest_price = item[2]
 
-    pass
+    lowest_price_item_id = []
+    for item in table:
+        if item[2] == lowest_price:
+            lowest_price_item_id.append(item[0])
+
+    if len(lowest_price_item_id) > 1:
+        return lowest_price_item_id
+    else:
+        return lowest_price_item_id
+
 
 
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)
