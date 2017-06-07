@@ -43,7 +43,7 @@ def generate_random(table):
     return generated
 
 
-def bubble_sort(numbers):
+def bubble_so_rt(numbers):
     n = len(numbers)
     replaces = True
     while replaces:

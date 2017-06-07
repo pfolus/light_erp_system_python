@@ -148,7 +148,6 @@ def update(table, id_):
     new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
     new_data.insert(0, id_[0])
 
-    print(new_data)
     for i in range(len(table)):
         if table[i][0] == id_[0]:
             table[i] = new_data
@@ -175,9 +174,9 @@ def get_lowest_price_item_id(table):
 
     if len(lowest_price_item_id) > 1:
         lowest_price_item_id = common.get_max_number(lowest_price_item_id)
-        return lowest_price_item_id
+        return lowest_price_item_id[0]
     else:
-        return lowest_price_item_id
+        return lowest_price_item_id[0]
 
 
 
