@@ -1,3 +1,13 @@
+def print_list_elements(results):
+
+    for i in range(len(results)):
+        print("{}{}. {}".format('\t', str(i+1), results[i]))
+
+
+def print_dict_elements(results):
+
+    for key, value in results.items():
+        print('{}{} : {}'.format('\t', key.capitalize(), value))
 
 
 def print_table(table, title_list):
@@ -40,14 +50,9 @@ def print_result(result, label):
     if type(result) == str or type(result) == int:
         print(result)
     elif type(result) == list:
-        for item in result:
-            if type(item) == list:
-                print(", ".join(item))
-            else:
-                print(item)
+        print_list_elements(result)
     elif type(result) == dict:
-        for key, value in result.items():
-            print(str(key) + ": " + str(value))
+        print_dict_elements(result)
     print()
 
 
