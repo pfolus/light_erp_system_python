@@ -176,7 +176,15 @@ def get_available_items(table):
 #
 # @table: list of lists
 def get_average_durability_by_manufacturers(table):
-
-    # your code
-
-    pass
+    durability_by_manufacturers = {}
+    manufacturers_list = [item[2] for item in table]
+    exclusive_manufacturers = list(set(manufacturers_list))
+    for i in range(len(exclusive_manufacturers)):
+        occurance = 0
+        durability_sum = 0
+        for j in range(len(manufacturers_list)):
+            if exclusive_manufacturers[i] == manufacturers_list[j]:
+                occurance += 1
+                durability_sum += int(table[j][4])
+        durability_by_manufacturers[exclusive_manufacturers[i]] = durability_sum / occurance
+    return durability_by_manufacturers
