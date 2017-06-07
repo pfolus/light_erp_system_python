@@ -25,13 +25,17 @@ def choose(table):
     elif option == "2":
         table = add(table)
     elif option == "3":
+        id_ = ui.get_inputs(["Enter console's id: "], "")
         table = remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs(["Enter console's id: "], "")
         table = update(table, id_)
     elif option == "5":
-        get_available_items(table)
+        result = get_available_items(table)
+        ui.print_result(result, "Oldest people")
     elif option == "6":
-        get_average_durability_by_manufacturers(table)
+        result = get_average_durability_by_manufacturers(table)
+        ui.print_result(result, "Oldest people")
     return table, option
 
 
@@ -90,8 +94,12 @@ def add(table):
         Table with a new record
     """
 
-    # your code
-
+    list_labels = ["Name", "Manufacturer",
+                   "Purchase date", "Drurability"]
+    inputs = ui.get_inputs(list_labels, "Enter console info")
+    id_ = common.generate_random(table)
+    inputs.insert(0, id_)
+    table.append(inputs)
     return table
 
 
@@ -106,9 +114,13 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
-    # your code
-
+    removed = False
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
+            removed = True
+    if not removed:
+        ui.print_error_message("There isn't console with such ID!")
     return table
 
 
@@ -123,9 +135,20 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-
-    # your code
-
+    list_labels = ["Name", "Manufacturer",
+                   "Purchase date", "Drurability"]
+    exists = False
+    for item in table:
+        if item[0] == id_[0]:
+            exists = True
+    if exists:
+        for i in range(len(table)):
+            if table[i][0] == id_[0]:
+                inputs = ui.get_inputs(list_labels, "Enter console info")
+                inputs.insert(0, id_[0])
+                table[i] = inputs
+    else:
+        ui.print_error_message("There isn't console with such ID!")
     return table
 
 

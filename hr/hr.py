@@ -136,11 +136,11 @@ def update(table, id_):
         if item[0] == id_[0]:
             exists = True
     if exists:
-        for item in table:
-            if item[0] == id_[0]:
+        for i in range(len(table)):
+            if table[i][0] == id_[0]:
                 inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
                 inputs.insert(0, id_[0])
-                table[table.index(item)] = inputs
+                table[i] = inputs
     else:
         ui.print_error_message("There isn't person with such ID!")
     return table
