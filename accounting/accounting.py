@@ -138,16 +138,17 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-    data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
 
-    for item in table:
-        if item[0] == id_[0]:
-            index = table.index(item)
-            inputs = ui.get_inputs(data_names, ('Change data of %s record:' % id_[0]))
-            inputs.insert(0, id_[0])
-            table[index] = inputs
+    data_labels = ['Month: ', 'Day: ', 'Year: ', 'Type (in/out): ', 'Amount: ']
+    new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
+    new_data.insert(0, id_[0])
 
+    print(new_data)
+    for i in range(len(table)):
+        if table[i][0] == id_[0]:
+            table[i] = new_data
     return table
+
 
 
 # special functions:

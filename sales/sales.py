@@ -65,7 +65,7 @@ def choose(table):
         table = update(table, id_)
     elif option == "5":
         low_price_id = get_lowest_price_item_id(table)
-        ui.print_result(low_price_id, 'Item sold for the lowest price:')
+        ui.print_result(low_price_id, 'ID of item sold for the lowest price')
     elif option == "6":
         inputs = ['Month from: ', 'Day from: ', 'Year from: ',
                   'Month to: ', 'Day to: ', 'Year to: ']
@@ -144,15 +144,14 @@ def update(table, id_):
         table with updated record
     """
 
-    data_names = ['Title', 'Price', 'Month', 'Day', 'Year']
+    data_labels = ['Title: ', 'Price: ', 'Month: ', 'Day: ', 'Year: ']
+    new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
+    new_data.insert(0, id_[0])
 
-    for item in table:
-        if item[0] == id_[0]:
-            index = table.index(item)
-            inputs = ui.get_inputs(data_names, ('Change data of %s record:' % id_[0]))
-            inputs.insert(0, id_[0])
-            table[index] = inputs
-
+    print(new_data)
+    for i in range(len(table)):
+        if table[i][0] == id_[0]:
+            table[i] = new_data
     return table
 
 
@@ -165,7 +164,6 @@ def update(table, id_):
 def get_lowest_price_item_id(table):
 
     lowest_price = table[0][2]
-    print(lowest_price)
     for item in table:
         if item[2] < lowest_price:
             lowest_price = item[2]
