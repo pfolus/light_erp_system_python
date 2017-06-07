@@ -164,7 +164,10 @@ def get_available_items(table):
     differences_list = [2017 - int(item[3]) for item in table]
     for i in range(len(differences_list)):
         if int(table[i][4]) >= differences_list[i]:
-            available_items_list.append(table[i])
+            row = [table[i][0], table[i][1],
+                   table[i][2], int(table[i][3]),
+                   int(table[i][4])]
+            available_items_list.append(row)
     return available_items_list
 
 
