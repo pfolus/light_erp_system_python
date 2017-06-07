@@ -168,12 +168,14 @@ def get_longest_name_id(table):
 
     longest_name = ''
     for item in table:
-        if len(item[1]) >= len(longest_name):
+        if len(item[1]) > len(longest_name):
             longest_name = item[1]
             longest_name_id = item[0]
-
+        elif len(item[1]) == len(longest_name):
+            if item[1] < longest_name:
+                longest_name = item[1]
+                longest_name_id = item[0]
     return longest_name_id
-
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -183,9 +185,7 @@ def get_subscribed_emails(table):
     subscription_list = []
     for item in table:
         if item[3] == '1':
-            single_subscription = item[2] + ' ; ' + item[1]
+            single_subscription = item[2] + ';' + item[1]
             subscription_list.append(single_subscription)
 
     return subscription_list
-
-
