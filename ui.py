@@ -40,7 +40,11 @@ def print_result(result, label):
     if type(result) == str:
         print(result)
     elif type(result) == list:
-        print("\n".join(result))
+        for item in result:
+            if type(item) == list:
+                print(", ".join(item))
+            else:
+                print(item)
     elif type(result) == dict:
         for key, value in result.items():
             print(str(key) + ": " + str(value))
