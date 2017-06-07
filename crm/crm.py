@@ -24,8 +24,9 @@ def choose(table):
         table = add(table)
     elif option == "3":
         id_ = ui.get_inputs(['ID: '], 'Provide ID of customer you want to remove: ')
-        table = remove(table, id_[0])
+        table = remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs(['ID: '], 'Provide ID of customer you want to update: ')
         table = update(table, id_)
     elif option == "5":
         longest_name_id = get_longest_name_id(table)
@@ -115,7 +116,7 @@ def remove(table, id_):
     """
 
     for item in table:
-        if item[0] == id_:
+        if item[0] == id_[0]:
             table.remove(item)
     return table
 
@@ -132,8 +133,14 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    new_data = ui.get_inputs(list_labels, 'Enter customers new data: ')
+    new_data.insert(0, id_[0])
 
+    print(new_data)
+    for i in range(len(table)):
+        if table[i][0] == id_[0]:
+            table[i] = new_data
     return table
 
 
