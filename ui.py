@@ -37,7 +37,7 @@ def print_result(result, label):
     """
 
     print(label + ":")
-    if type(result) == str:
+    if type(result) == str or type(result) == int:
         print(result)
     elif type(result) == list:
         for item in result:

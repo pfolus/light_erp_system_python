@@ -62,7 +62,8 @@ def choose(table):
         id_ = ui.get_inputs(['ID: '], 'Which record would you like to update?')
         table = update(table, id_)
     elif option == "5":
-        which_year_max(table)
+        result = which_year_max(table)
+        ui.print_result(result, "Most profitable year")
     elif option == "6":
         year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
         avg_amount(table, year)
@@ -168,7 +169,6 @@ def which_year_max(table):
     for item in profit_years:
         if int(item[5]) > biggest_profit:
             year_max = item[3]
-
     return int(year_max)
 
 
