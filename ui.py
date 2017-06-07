@@ -36,7 +36,6 @@ def print_result(result, label):
         This function doesn't return anything it only prints to console.
     """
 
-    print()
     print(label + ":")
     if type(result) == str:
         print(result)
@@ -103,6 +102,7 @@ def get_inputs(list_labels, title):
     for item in list_labels:
         user_input = input(item + " ")
         inputs.append(user_input)
+    print()
 
     return inputs
 
@@ -121,6 +121,5 @@ def print_error_message(message):
         This function doesn't return anything it only prints to console.
     """
 
-    print()
     print("Error: ", message)
     print()

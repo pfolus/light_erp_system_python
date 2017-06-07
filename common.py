@@ -32,6 +32,7 @@ def generate_random(table):
     generated = random.choice(id_list)
 
     while generated in id_list:
+        generated = ""
         for i in range(0, 2):
             generated += random.choice(special)
             generated += random.choice(upper)
@@ -55,3 +56,27 @@ def bubble_sort(numbers):
                 replaces = True
         n -= 1
     return numbers
+
+
+def minimum(numbers):
+    min_number = numbers[0]
+    for i in range(1, len(numbers)):
+        if number[i] < min_number:
+            min_number = number[i]
+    return min_number
+
+
+def maximum(numbers):
+    max_number = numbers[0]
+    for i in range(1, len(numbers)):
+        if number[i] > max_number:
+            max_number = number[i]
+    return max_number
+
+
+def average(numbers):
+    numbers_sum = 0
+    for number in numbers:
+        numbers_sum += number
+    average = numbers_sum / len(numbers)
+    return average
