@@ -102,6 +102,7 @@ def get_inputs(list_labels, title):
     for item in list_labels:
         user_input = input(item + " ")
         inputs.append(user_input)
+    print()
 
     return inputs
 
