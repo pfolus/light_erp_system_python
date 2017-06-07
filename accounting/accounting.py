@@ -143,7 +143,6 @@ def update(table, id_):
     new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
     new_data.insert(0, id_[0])
 
-    print(new_data)
     for i in range(len(table)):
         if table[i][0] == id_[0]:
             table[i] = new_data
@@ -170,13 +169,12 @@ def which_year_max(table):
         if int(item[5]) > biggest_profit:
             year_max = item[3]
 
-    return year_max
+    return int(year_max)
 
 
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
-
     profit = 0
     data_of_given_year = []
 
