@@ -30,10 +30,12 @@ def choose(table):
         id_ = ui.get_inputs(['ID: '], 'Provide ID of a game you want to update: ')
         table = update(table, id_)
     elif option == "5":
-        get_counts_by_manufacturers(table)
+        result = get_counts_by_manufacturers(table)
+        ui.print_result(result, 'Number of different games by each manufacturer')
     elif option == "6":
-        get_average_by_manufacturer(table)
-    
+        manufacturer = ui.get_inputs(['Manufacturer: '], 'Provide a manufacturer of a game: ')
+        result = get_average_by_manufacturer(table, manufacturer)
+        ui.print_result(str(result), 'Average games of provided manufacturer in stock')
     return table, option
 
 
@@ -114,10 +116,15 @@ def remove(table, id_):
         Table without specified record.
     """
 
+    removed = False
+
     for item in table:
         if item[0] == id_[0]:
             table.remove(item)
-
+            removed = True
+    
+    if not removed:
+        ui.print_error_message("There isn't a game with such ID!")
     return table
 
 
@@ -133,14 +140,22 @@ def update(table, id_):
         table with updated record
     """
 
-    list_labels = ['Title: ', 'Manufacturer: ', 'Price: ', 'Number in stock: ']
-    new_data = ui.get_inputs(list_labels, 'Enter customers new data: ')
-    new_data.insert(0, id_[0])
+    exist = False
+    for item in table:
+        if item[0] == id_[0]:
+            exist = True
 
-    print(new_data)
-    for i in range(len(table)):
-        if table[i][0] == id_[0]:
-            table[i] = new_data
+    if exist:
+        list_labels = ['Title: ', 'Manufacturer: ', 'Price: ', 'Number in stock: ']
+        new_data = ui.get_inputs(list_labels, 'Enter customers new data: ')
+        new_data.insert(0, id_[0])
+
+        for i in range(len(table)):
+            if table[i][0] == id_[0]:
+                table[i] = new_data
+    else:
+        ui.print_error_message("There isn't a game with such ID!")
+
     return table
 
 
@@ -151,15 +166,34 @@ def update(table, id_):
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
 
-    # your code
+    #getting a list of manufacturers
+    manufacturers = []
+    for item in table:
+        if item[2] not in manufacturers:
+            manufacturers.append(item[2])
 
-    pass
+    manufacturers_games = {}
+
+    for record in manufacturers:
+        games_counter = 0
+        for item in table:
+            if item[2] == record:
+                games_counter += 1
+            manufacturers_games[record] = games_counter
+
+    return manufacturers_games
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
 
-    # your code
+    games_counter = 0
+    games_types = 0
+    for item in table:
+        if item[2] == manufacturer[0]:
+            games_counter += int(item[4])
+            games_types += 1
+    average_amount = games_counter / games_types
 
-    pass
+    return average_amount
