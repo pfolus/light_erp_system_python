@@ -72,3 +72,11 @@ def maximum(numbers):
         if number[i] > max_number:
             max_number = number[i]
     return max_number
+
+
+def average(numbers):
+    numbers_sum = 0
+    for number in numbers:
+        numbers_sum += number
+    average = numbers_sum / len(numbers)
+    return average
