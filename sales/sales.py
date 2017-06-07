@@ -23,7 +23,6 @@ def start_module():
     Starts this module and displays its menu.
     User can access default special features from here.
     User can go back to main menu from here.
-
     Returns:
         None
     """
@@ -33,10 +32,10 @@ def start_module():
     option = ""
     while option != "0":
         handle_menu()
-        try:
-            table, option = choose(table)
-        except KeyError as err:
-            ui.print_error_message(err)
+        #try:
+        table, option = choose(table)
+        #except KeyError as err:
+            #ui.print_error_message(err)
     data_manager.write_table_to_file('sales/sales.csv', table)
 
 
@@ -73,7 +72,6 @@ def choose(table):
         sold_items = get_items_sold_between(table, dates[0], dates[1], dates[2], dates[3], dates[4], dates[5])
         ui.print_result(sold_items, 'Items sold between dates:')
     return table, option
-
 
 def show_table(table):
     """
@@ -174,9 +172,9 @@ def get_lowest_price_item_id(table):
 
     if len(lowest_price_item_id) > 1:
         lowest_price_item_id = common.get_max_number(lowest_price_item_id)
-        return lowest_price_item_id[0]
+        return lowest_price_item_id
     else:
-        return lowest_price_item_id[0]
+        return lowest_price_item_id
 
 
 
@@ -219,9 +217,8 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
                         sold_items.append(item)
 
 
-        for x in range(2,6):
-            for i in sold_items:
-                i[x] = int(i[x])
-
+    for x in range(2,6):
+        for i in sold_items:
+             i[x] = int(i[x])
 
     return sold_items
