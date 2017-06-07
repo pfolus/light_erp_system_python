@@ -70,8 +70,8 @@ def choose(table):
         inputs = ['Month from: ', 'Day from: ', 'Year from: ',
                   'Month to: ', 'Day to: ', 'Year to: ']
         dates = ui.get_inputs(inputs, 'Items sold between dates:')
-        get_items_sold_between(table, dates[0], dates[1], dates[2], dates[3], dates[4], dates[5])
-
+        sold_items = get_items_sold_between(table, dates[0], dates[1], dates[2], dates[3], dates[4], dates[5])
+        ui.print_result(sold_items, 'Items sold between dates:')
     return table, option
 
 
@@ -184,6 +184,8 @@ def get_lowest_price_item_id(table):
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
-    # your code
-
-    pass
+    sold_items = []
+    for item in table:
+        if (item[3] >= month_from and item[3] <= month_to) and (item[4] >= day_from and item[4] <= day_to) and (item[5] >= year_from and item[5] <= year_to):
+            sold_items.append(item)
+    return sold_items
