@@ -19,18 +19,21 @@ def choose(table):
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
-        show_table('table')
+        show_table(table)
     elif option == "2":
         table = add(table)
     elif option == "3":
+        id_ = ui.get_inputs(['ID: '], 'Provide ID of customer you want to remove: ')
         table = remove(table, id_)
     elif option == "4":
+        id_ = ui.get_inputs(['ID: '], 'Provide ID of customer you want to update: ')
         table = update(table, id_)
     elif option == "5":
-        get_longest_name_id(table)
+        longest_name_id = get_longest_name_id(table)
+        ui.print_result(longest_name_id, 'ID of a customer with a longest name')
     elif option == "6":
-        get_subscribed_emails(table)
-    
+        subscription_list = get_subscribed_emails(table)
+        ui.print_result(subscription_list, 'List of customers with a subscription')
     return table, option
 
 
@@ -89,12 +92,13 @@ def add(table):
     Returns:
         Table with a new record
     """
+    generated = common.generate_random(table)
 
-    list_labels = ['name', 'email', 'Is she/he subscribed to the newsletter? [1/0]']
-    inputs = ui.get_inputs(list_labels, title)
-    inputs = inputs.insert(0, common.generate_random())
+    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    inputs = ui.get_inputs(list_labels, 'Provide data: ')
+    inputs.insert(0, generated)
 
-    table = table.append(inputs)
+    table.append(inputs)
 
     return table
 
@@ -111,8 +115,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
-
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
     return table
 
 
@@ -128,8 +133,14 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    new_data = ui.get_inputs(list_labels, 'Enter customers new data: ')
+    new_data.insert(0, id_[0])
 
+    print(new_data)
+    for i in range(len(table)):
+        if table[i][0] == id_[0]:
+            table[i] = new_data
     return table
 
 
@@ -146,8 +157,7 @@ def get_longest_name_id(table):
         if len(item[1]) >= len(longest_name):
             longest_name = item[1]
             longest_name_id = item[0]
-    
-    print(longest_name_id)
+
     return longest_name_id
 
 

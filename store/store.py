@@ -16,6 +16,36 @@ import data_manager
 import common
 
 
+def choose(table):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        table = add(table)
+    elif option == "3":
+        table = remove(table, id_)
+    elif option == "4":
+        table = update(table, id_)
+    elif option == "5":
+        get_counts_by_manufacturers(table)
+    elif option == "6":
+        get_average_by_manufacturer(table)
+    
+    return table, option
+
+
+def handle_menu():
+    options = ["Show table",
+               "Add",
+               "Remove",
+               "Update",
+               "Get counts by manufacturers",
+               "Get average by manufacturer",]
+
+    ui.print_menu("Store Module", options, "Return to menu")
+
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -25,10 +55,12 @@ def start_module():
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    option = ""
+    while option != "0":
+        handle_menu()
+        table, option = choose(table)
+    data_manager.write_table_to_file("crm/customers.csv", table)
 
 
 def show_table(table):
@@ -58,7 +90,15 @@ def add(table):
         Table with a new record
     """
 
-    # your code
+    generated = common.generate_random(table)
+
+    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    inputs = ui.get_inputs(list_labels, 'Provide data: ')
+    inputs.insert(0, generated)
+
+
+    print(inputs)
+    table.append(inputs)
 
     return table
 
