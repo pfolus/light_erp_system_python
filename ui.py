@@ -1,13 +1,13 @@
 def print_list_elements(results):
 
     for i in range(len(results)):
-        print("{}{}. {}".format('\t', str(i+1), results[i]))
+        print("{:4}{}. {}".format('', str(i+1), results[i]))
 
 
 def print_dict_elements(results):
 
     for key, value in results.items():
-        print('{}{} : {}'.format('\t', key.capitalize(), value))
+        print('{:4}{} : {}'.format('', key.capitalize(), value))
 
 
 def print_table(table, title_list):
@@ -77,13 +77,12 @@ def print_menu(title, list_options, exit_message):
         This function doesn't return anything it only prints to console.
     """
 
-    print(title)
+    print(title + ":")
     counter = 1
     for option in list_options:
         print("{:>7}".format('(' + str(counter) + ')') + " {}".format(option))
         counter += 1
     print("{:>7}".format('(0)') + " {}".format(exit_message))
-    print()
 
 
 def get_inputs(list_labels, title):
