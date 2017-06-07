@@ -176,4 +176,20 @@ def which_year_max(table):
 # return the answer (number)
 def avg_amount(table, year):
 
-    pass
+    profit = 0
+    data_of_given_year = []
+
+    for item in table:
+        if item[3] == year[0]:
+            data_of_given_year.append(item)
+
+    for record in data_of_given_year:
+        if record[4] == 'in':
+            profit += int(record[5])
+        elif record[4] == 'out':
+            profit -= int(record[5])
+    try:
+        avg_profit = profit / len(data_of_given_year)
+        ui.print_result(str(avg_profit), 'Average profit per item:')
+    except ZeroDivisionError:
+        ui.print_error_message('There are no record from provided year')
