@@ -32,7 +32,7 @@ def choose(table):
         table = update(table, id_)
     elif option == "5":
         result = get_available_items(table)
-        ui.print_result(result, "Oldest people")
+        ui.print_result(result, "Available consoles")
     elif option == "6":
         result = get_average_durability_by_manufacturers(table)
         ui.print_result(result, "Oldest people")
@@ -160,8 +160,12 @@ def update(table, id_):
 #
 # @table: list of lists
 def get_available_items(table):
+    available_items_list = []
     differences_list = [2017 - int(item[3]) for item in table]
-    
+    for i in range(len(differences_list)):
+        if int(table[i][4]) >= differences_list[i]:
+            available_items_list.append(table[i])
+    return available_items_list
 
 
 # the question: What are the average durability times for each manufacturer?
