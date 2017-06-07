@@ -28,9 +28,51 @@ def start_module():
         None
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
 
-    pass
+    option = ""
+    while option != "0":
+        handle_menu()
+        try:
+            table, option = choose(table)
+        except KeyError as err:
+            ui.print_error_message(err)
+    data_manager.write_table_to_file('sales/sales.csv', table)
+
+
+def handle_menu():
+
+    menu_name = 'Sales Manager:'
+    menu_options = ['Show records', 'Add a record',
+                    'Remove a record', 'Update a record',
+                    'Lowest price game', 'Items sold between dates']
+
+    ui.print_menu(menu_name, menu_options, 'Exit to menu')
+
+
+def choose(table):
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+    elif option == "2":
+        table = add(table)
+    elif option == "3":
+        id_ = ui.get_inputs(['ID: '], 'Which record would you like to remove?')
+        table = remove(table, id_)
+    elif option == "4":
+        id_ = ui.get_inputs(['ID: '], 'Which record would you like to update?')
+        table = update(table, id_)
+    elif option == "5":
+        low_price_id = get_lowest_price_item_id(table)
+        ui.print_result(low_price_id, 'Item sold for the lowest price:')
+    elif option == "6":
+        inputs = ['Month from: ', 'Day from: ', 'Year from: ',
+                  'Month to: ', 'Day to: ', 'Year to: ']
+        dates = ui.get_inputs(inputs, 'Items sold between dates:')
+        get_items_sold_between(table, dates[0], dates[1], dates[2], dates[3], dates[4], dates[5])
+
+    return table, option
 
 
 def show_table(table):
@@ -60,7 +102,13 @@ def add(table):
         Table with a new record
     """
 
-    # your code
+    data_names = ['Title', 'Price', 'Month', 'Day', 'Year']
+
+    inputs = ui.get_inputs(data_names, 'Adding new record:')
+
+    id_ = common.generate_random(table)
+    inputs.insert(0, id_)
+    table.append(inputs)
 
     return table
 
@@ -77,7 +125,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
+    for item in table:
+        if item[0] == id_[0]:
+            table.remove(item)
 
     return table
 
@@ -94,7 +144,14 @@ def update(table, id_):
         table with updated record
     """
 
-    # your code
+    data_names = ['Title', 'Price', 'Month', 'Day', 'Year']
+
+    for item in table:
+        if item[0] == id_[0]:
+            index = table.index(item)
+            inputs = ui.get_inputs(data_names, ('Change data of %s record:' % id_[0]))
+            inputs.insert(0, id_[0])
+            table[index] = inputs
 
     return table
 
@@ -107,9 +164,22 @@ def update(table, id_):
 # if there are more than one with the lowest price, return the first by descending alphabetical order
 def get_lowest_price_item_id(table):
 
-    # your code
+    lowest_price = table[0][2]
+    print(lowest_price)
+    for item in table:
+        if item[2] < lowest_price:
+            lowest_price = item[2]
 
-    pass
+    lowest_price_item_id = []
+    for item in table:
+        if item[2] == lowest_price:
+            lowest_price_item_id.append(item[0])
+
+    if len(lowest_price_item_id) > 1:
+        return lowest_price_item_id
+    else:
+        return lowest_price_item_id
+
 
 
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)

@@ -110,10 +110,13 @@ def remove(table, id_):
     Returns:
         Table without specified record.
     """
-
+    removed = False
     for item in table:
         if item[0] == id_[0]:
             table.remove(item)
+            removed = True
+    if not removed:
+        ui.print_error_message("There isn't person with such ID!")
     return table
 
 
@@ -128,13 +131,18 @@ def update(table, id_):
     Returns:
         table with updated record
     """
-
+    exists = False
     for item in table:
         if item[0] == id_[0]:
-            inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
-            inputs.insert(0, id_[0])
-            table[table.index(item)] = inputs
-
+            exists = True
+    if exists:
+        for item in table:
+            if item[0] == id_[0]:
+                inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+                inputs.insert(0, id_[0])
+                table[table.index(item)] = inputs
+    else:
+        ui.print_error_message("There isn't person with such ID!")
     return table
 
 
@@ -154,7 +162,11 @@ def get_oldest_person(table):
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
-
-    # your code
-
-    pass
+    average_year = common.get_average_number([int(item[2]) for item in table])
+    differences_list = [abs(int(item[2]) - average_year) for item in table]
+    minimum_difference = common.get_min_number(differences_list)
+    closest_people = []
+    for i in range(len(differences_list)):
+        if differences_list[i] == minimum_difference:
+            closest_people.append(table[i][1])
+    return closest_people
