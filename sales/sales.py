@@ -219,9 +219,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
                         sold_items.append(item)
 
 
-        for x in range(2,6):
-            for i in sold_items:
-                i[x] = int(i[x])
+    for x in range(2,6):
+        for i in sold_items:
+            i[x] = int(i[x])
 
 
     return sold_items
