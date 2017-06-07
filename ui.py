@@ -7,7 +7,7 @@ def print_list_elements(results):
 def print_dict_elements(results):
 
     for key, value in results.items():
-        print('{:4}{} : {}'.format('', key.capitalize(), value))
+        print('{:4}{}: {}'.format('', key.capitalize(), value))
 
 
 def print_table(table, title_list):
