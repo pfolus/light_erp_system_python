@@ -35,7 +35,7 @@ def choose(table):
         ui.print_result(result, "Available consoles")
     elif option == "6":
         result = get_average_durability_by_manufacturers(table)
-        ui.print_result(result, "Oldest people")
+        ui.print_result(result, "Average durability by mafucaturer")
     return table, option
 
 
