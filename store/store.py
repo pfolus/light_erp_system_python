@@ -90,7 +90,15 @@ def add(table):
         Table with a new record
     """
 
-    # your code
+    generated = common.generate_random(table)
+
+    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+    inputs = ui.get_inputs(list_labels, 'Provide data: ')
+    inputs.insert(0, generated)
+
+
+    print(inputs)
+    table.append(inputs)
 
     return table
 

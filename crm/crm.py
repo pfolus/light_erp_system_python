@@ -23,14 +23,16 @@ def choose(table):
     elif option == "2":
         table = add(table)
     elif option == "3":
-        table = remove(table, id_)
+        id_ = ui.get_inputs(['ID: '], 'Provide ID of customer you want to remove: ')
+        table = remove(table, id_[0])
     elif option == "4":
         table = update(table, id_)
     elif option == "5":
         longest_name_id = get_longest_name_id(table)
+        ui.print_result(longest_name_id, 'ID of a customer with a longest name')
     elif option == "6":
         subscription_list = get_subscribed_emails(table)
-    
+        ui.print_result(subscription_list, 'List of customers with a subscription')
     return table, option
 
 
@@ -95,8 +97,6 @@ def add(table):
     inputs = ui.get_inputs(list_labels, 'Provide data: ')
     inputs.insert(0, generated)
 
-
-    print(inputs)
     table.append(inputs)
 
     return table
@@ -114,8 +114,9 @@ def remove(table, id_):
         Table without specified record.
     """
 
-    # your code
-
+    for item in table:
+        if item[0] == id_:
+            table.remove(item)
     return table
 
 
@@ -149,8 +150,7 @@ def get_longest_name_id(table):
         if len(item[1]) >= len(longest_name):
             longest_name = item[1]
             longest_name_id = item[0]
-    
-    print(longest_name_id) # TO REMOVE
+
     return longest_name_id
 
 
@@ -165,7 +165,6 @@ def get_subscribed_emails(table):
             single_subscription = item[2] + ' ; ' + item[1]
             subscription_list.append(single_subscription)
 
-    print('\n'.join(subscription_list)) # TO REMOVE
     return subscription_list
 
 
