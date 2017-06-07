@@ -185,7 +185,14 @@ def get_lowest_price_item_id(table):
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
     sold_items = []
+
+    date_from = ((int(year_from) - 1) * 365) + (int(month_from) * 30 + int(day_from))
+    date_to = ((int(year_to) - 1) * 365) + (int(month_to) * 30 + int(day_to))
+
     for item in table:
-        if (item[3] >= month_from and item[3] <= month_to) and (item[4] >= day_from and item[4] <= day_to) and (item[5] >= year_from and item[5] <= year_to):
+        date = ((int(item[5]) - 1) * 365) + ((int(item[3]) * 30) + int(item[4]))
+        
+        if date >= date_from and date <= date_to:
             sold_items.append(item)
+
     return sold_items
