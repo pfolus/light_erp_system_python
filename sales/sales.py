@@ -194,7 +194,7 @@ def get_lowest_price_item_id(table):
     so_rted_game_names = []
     lowest_price = table[0][2]
     for item in table:
-        if item[2] < lowest_price:
+        if int(item[2]) < int(lowest_price):
             lowest_price = item[2]
 
     lowest_price_item_id = []
