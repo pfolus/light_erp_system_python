@@ -82,7 +82,7 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount', 'xD']
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
     ui.print_table(table, title_list)
 
 
