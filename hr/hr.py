@@ -74,12 +74,23 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file("hr/persons.csv")
+
     option = ""
-    while option != "0":
+    reading_file_successful = True
+    try:
+        table = data_manager.get_table_from_file("hr/persons.csv")
+    except FileNotFoundError:
+        ui.print_error_message('File not found, couldn\'t run the module.')
+        reading_file_successful = False
+
+    while option != "0" and reading_file_successful:
         handle_menu()
-        table, option = choose(table)
-    data_manager.write_table_to_file("hr/persons.csv", table)
+        try:
+            table, option = choose(table)
+        except KeyError as err:
+            ui.print_error_message(err)
+    if reading_file_successful:
+        data_manager.write_table_to_file("hr/persons.csv", table)
 
 
 def show_table(table):

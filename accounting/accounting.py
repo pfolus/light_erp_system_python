@@ -28,16 +28,22 @@ def start_module():
     Returns:
         None
     """
-    table = data_manager.get_table_from_file('accounting/items.csv')
-
     option = ""
-    while option != "0":
+    reading_file_successful = True
+    try:
+        table = data_manager.get_table_from_file('accounting/items.csv')
+    except FileNotFoundError:
+        ui.print_error_message('File not found, couldn\'t run the module.')
+        reading_file_successful = False
+
+    while option != "0" and reading_file_successful:
         handle_menu()
         try:
             table, option = choose(table)
         except KeyError as err:
             ui.print_error_message(err)
-    data_manager.write_table_to_file("accounting/items.csv", table)
+    if reading_file_successful:
+        data_manager.write_table_to_file("accounting/items.csv", table)
 
 
 def handle_menu():
