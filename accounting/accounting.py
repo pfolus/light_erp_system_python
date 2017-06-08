@@ -66,6 +66,8 @@ def choose(table):
         ui.print_result(result, "Most profitable year")
     elif option == "6":
         year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
+        while not year[0].isdigit():
+            year = ui.get_inputs(['Year: '], 'Average profit per item in given year.')
         avg_profit = avg_amount(table, int(year[0]))
         ui.print_result(str(avg_profit), 'Average profit per item:')
 
