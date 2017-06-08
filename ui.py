@@ -1,3 +1,11 @@
+def get_max_number(numbers):
+    max_number = numbers[0]
+    for i in range(1, len(numbers)):
+        if numbers[i] > max_number:
+            max_number = numbers[i]
+    return max_number
+
+
 def print_list_elements(results):
 
     for i in range(len(results)):
@@ -28,47 +36,77 @@ def print_table(table, title_list):
     Returns:
         This function doesn't return anything it only prints to console.
     """
+    # Appends dictionary with widest record's length
+    column_widths = {}
+    total_width = 0
 
-    #checking for the longest #2 title:
-    title2_width = 0
-    for item in table:
-        if len(item[1]) > title2_width:
-            title2_width = len(item[1])
-    print(title2_width)
+    for i in range(len(title_list)):
+        widths = []
+        widths.append(len(str(title_list[i])))
+        for item in table:
+            widths.append(len(str(item[i])))
+        max_column_width = get_max_number(widths) + 4
+        column_widths["column_" + str(i)] = max_column_width
+        total_width += max_column_width
+    total_width += len(title_list) + 1
 
-
-
-    header = ['|']
-    for item in title_list:
-        header.append('   ' + item + '   |')
-    #print(''.join(header))
-    printed_table = []
-
-    width = 0
-
-    for item in title_list:
-        for i in item:
-            width += 1
-    upper_line = '-' * (width + 7 * len(title_list))
-    upper_line = list(upper_line)
-    upper_line[0] = '/'
-    upper_line.insert(-1, '-')
-    upper_line[-1] = '\\'
-
-
-    print("".join(upper_line))
-    print(''.join(header))
-
-    upper_line[0] = '|'
-    upper_line[-1] = '|'
-    print("".join(upper_line))
-
-    for item in table:
-        printed_table.append(item)
-
-
-    for elem in printed_table:
-        print('|'+"  |  ".join(elem)+'|')
+    # Printing
+    print("/" + "-" * (total_width - 2) + "\\")
+    print("|", end="")
+    for i in range(len(title_list)):
+        print("{:^{}}".format(title_list[i], column_widths["column_" + str(i)]), "|", end="", sep="")
+    print()
+    for i in range(len(table)):
+        print("|", end="")
+        for j in range(len(table[i])):
+            print("{:-^{}}".format("", column_widths["column_" + str(j)]), "|", end="", sep="")
+        print()
+        print("|", end="")
+        for j in range(len(table[i])):
+            print("{:^{}}".format(table[i][j], column_widths["column_" + str(j)]), "|", end="", sep="")
+        print()
+    print("\\" + "-" * (total_width - 2) + "/")
+    print()
+    # #checking for the longest #2 title:
+    # title2_width = 0
+    # for item in table:
+    #     if len(item[1]) > title2_width:
+    #         title2_width = len(item[1])
+    # print(title2_width)
+    #
+    #
+    #
+    # header = ['|']
+    # for item in title_list:
+    #     header.append('   ' + item + '   |')
+    # #print(''.join(header))
+    # printed_table = []
+    #
+    # width = 0
+    #
+    # for item in title_list:
+    #     for i in item:
+    #         width += 1
+    # upper_line = '-' * (width + 7 * len(title_list))
+    # upper_line = list(upper_line)
+    # upper_line[0] = '/'
+    # upper_line.insert(-1, '-')
+    # upper_line[-1] = '\\'
+    #
+    #
+    # print("".join(upper_line))
+    # print(''.join(header))
+    #
+    # upper_line[0] = '|'
+    # upper_line[-1] = '|'
+    # print("".join(upper_line))
+    #
+    # for item in table:
+    #     printed_table.append(item)
+    #
+    #
+    # for elem in printed_table:
+    #     print('|'+"  |  ".join(elem)+'|')
 
 def print_result(result, label):
     """

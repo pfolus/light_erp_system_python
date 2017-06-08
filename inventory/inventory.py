@@ -77,10 +77,9 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    title_list = ["ID", "Name", "Manufacturer",
+                  "Purchase date", "Durability"]
+    ui.print_table(table, title_list)
 
 
 def add(table):
