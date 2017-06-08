@@ -91,8 +91,12 @@ def add(table):
     Returns:
         Table with a new record
     """
+    data_names = ['Name', 'Year']
+    inputs = data_names[:]
 
-    inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+    while not inputs[1].isdigit():
+        inputs = ui.get_inputs(data_names, "Enter person info")
+
     id_ = common.generate_random(table)
     inputs.insert(0, id_)
     table.append(inputs)
@@ -138,7 +142,13 @@ def update(table, id_):
     if exists:
         for i in range(len(table)):
             if table[i][0] == id_[0]:
-                inputs = ui.get_inputs(["Name", "Year"], "Enter person info")
+                
+                data_names = ['Name', 'Year']
+                inputs = data_names[:]
+
+                while not inputs[1].isdigit():
+                    inputs = ui.get_inputs(data_names, "Enter person info")
+
                 inputs.insert(0, id_[0])
                 table[i] = inputs
     else:

@@ -82,7 +82,7 @@ def show_table(table):
     Returns:
         None
     """
-    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount', 'xD']
     ui.print_table(table, title_list)
 
 
@@ -96,10 +96,12 @@ def add(table):
     Returns:
         Table with a new record
     """
-
     data_names = ['month', 'day', 'year', 'type (in/out)', 'amount']
+    possible_types = ['in', 'out']
+    inputs = data_names[:]
 
-    inputs = ui.get_inputs(data_names, 'Adding new record:')
+    while not inputs[0].isdigit() or not inputs[1].isdigit() or not inputs[2].isdigit() or inputs[3] not in possible_types or not inputs[4].isdigit():
+        inputs = ui.get_inputs(data_names, 'Adding new record:')
 
     id_ = common.generate_random(table)
     inputs.insert(0, id_)
@@ -140,7 +142,12 @@ def update(table, id_):
     """
 
     data_labels = ['Month: ', 'Day: ', 'Year: ', 'Type (in/out): ', 'Amount: ']
-    new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
+    possible_types = ['in', 'out']
+    new_data = data_labels[:]
+
+    while not new_data[0].isdigit() or not new_data[1].isdigit() or not new_data[2].isdigit() or new_data[3] not in possible_types or not new_data[4].isdigit():
+        new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
+
     new_data.insert(0, id_[0])
 
     for i in range(len(table)):

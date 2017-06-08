@@ -101,7 +101,12 @@ def add(table):
     generated = common.generate_random(table)
 
     list_labels = ['Title: ', 'Manufacturer: ', 'Price: ', 'Number in stock: ']
-    inputs = ui.get_inputs(list_labels, 'Provide data: ')
+
+    inputs = list_labels[:]
+
+    while not inputs[2].isdigit() or not inputs[3].isdigit():
+        inputs = ui.get_inputs(list_labels, 'Provide data: ')
+        
     inputs.insert(0, generated)
     table.append(inputs)
 
@@ -126,7 +131,7 @@ def remove(table, id_):
         if item[0] == id_[0]:
             table.remove(item)
             removed = True
-    
+
     if not removed:
         ui.print_error_message("There isn't a game with such ID!")
     return table

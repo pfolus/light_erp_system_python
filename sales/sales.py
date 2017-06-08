@@ -102,7 +102,11 @@ def add(table):
 
     data_names = ['Title', 'Price', 'Month', 'Day', 'Year']
 
-    inputs = ui.get_inputs(data_names, 'Adding new record:')
+    inputs = data_names[:]
+
+    while not inputs[1].isdigit() or not inputs[2].isdigit() or not inputs[3].isdigit() or not inputs[4].isdigit():
+        inputs = ui.get_inputs(data_names, 'Adding new record:')
+        
 
     id_ = common.generate_random(table)
     inputs.insert(0, id_)

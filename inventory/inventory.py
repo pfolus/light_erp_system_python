@@ -96,7 +96,12 @@ def add(table):
 
     list_labels = ["Name", "Manufacturer",
                    "Purchase date", "Drurability"]
-    inputs = ui.get_inputs(list_labels, "Enter console info")
+
+    inputs = list_labels[:]
+
+    while not inputs[2].isdigit() or not inputs[3].isdigit():
+        inputs = ui.get_inputs(list_labels, "Enter console info")
+        
     id_ = common.generate_random(table)
     inputs.insert(0, id_)
     table.append(inputs)
