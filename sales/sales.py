@@ -83,10 +83,9 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    title_list = ["ID", "Title", "Price",
+                  "Month", "Day", "Year"]
+    ui.print_table(table, title_list)
 
 
 def add(table):
