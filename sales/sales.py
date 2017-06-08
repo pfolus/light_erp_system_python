@@ -159,7 +159,8 @@ def update(table, id_):
 # return type: string (id)
 # if there are more than one with the lowest price, return the first by descending alphabetical order
 def get_lowest_price_item_id(table):
-
+    game_names_with_id = {}
+    so_rted_game_names = []
     lowest_price = table[0][2]
     for item in table:
         if item[2] < lowest_price:
@@ -169,10 +170,13 @@ def get_lowest_price_item_id(table):
     for item in table:
         if item[2] == lowest_price:
             lowest_price_item_id.append(item[0])
+            game_names_with_id[item[0]] = item[1]
 
     if len(lowest_price_item_id) > 1:
-        lowest_price_item_id = common.get_max_number(lowest_price_item_id)
-        return lowest_price_item_id[0]
+        so_rted_game_names = common.get_max_number(list(game_names_with_id.values()))
+        for key, value in game_names_with_id.items():
+            if value == so_rted_game_names[0]:
+                return key
     else:
         return lowest_price_item_id[0]
 
@@ -196,9 +200,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         '''
 
         if game_year >= year_from and game_year <= year_to:
-            if game_year != year_from and game_year != year_to:
+            if game_year != year_from and game_year != year_to:  # game year between provided years
                 sold_items.append(item)
-            elif game_year == year_from:
+            elif game_year == year_from:  # game year the same as year from
                 if game_month > month_from:
                     if year_from == year_to:
                         if game_month < month_to:
@@ -208,7 +212,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
                 elif game_month == month_from:
                     if game_day > day_from:
                         sold_items.append(item)
-            elif game_year == year_to:
+            elif game_year == year_to:  # game year the same as year to
                 if game_month < month_to:
                     sold_items.append(item)
                 elif game_month == month_to:
