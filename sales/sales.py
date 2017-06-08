@@ -83,10 +83,9 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    title_list = ["ID", "Title", "Price",
+                  "Month", "Day", "Year"]
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -106,7 +105,7 @@ def add(table):
 
     while not inputs[1].isdigit() or not inputs[2].isdigit() or not inputs[3].isdigit() or not inputs[4].isdigit():
         inputs = ui.get_inputs(data_names, 'Adding new record:')
-        
+
 
     id_ = common.generate_random(table)
     inputs.insert(0, id_)

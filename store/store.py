@@ -81,10 +81,15 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
-
-    pass
+    # id: string
+    #     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+    # title: string
+    # manufacturer: string
+    # price: number (dollars)
+    # in_stock: number
+    title_list = ["ID", "Title", "Manufacturer",
+                  "Price", "Number in stock"]
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -106,7 +111,7 @@ def add(table):
 
     while not inputs[2].isdigit() or not inputs[3].isdigit():
         inputs = ui.get_inputs(list_labels, 'Provide data: ')
-        
+
     inputs.insert(0, generated)
     table.append(inputs)
 

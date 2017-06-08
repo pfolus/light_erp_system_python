@@ -67,46 +67,7 @@ def print_table(table, title_list):
         print()
     print("\\" + "-" * (total_width - 2) + "/")
     print()
-    # #checking for the longest #2 title:
-    # title2_width = 0
-    # for item in table:
-    #     if len(item[1]) > title2_width:
-    #         title2_width = len(item[1])
-    # print(title2_width)
-    #
-    #
-    #
-    # header = ['|']
-    # for item in title_list:
-    #     header.append('   ' + item + '   |')
-    # #print(''.join(header))
-    # printed_table = []
-    #
-    # width = 0
-    #
-    # for item in title_list:
-    #     for i in item:
-    #         width += 1
-    # upper_line = '-' * (width + 7 * len(title_list))
-    # upper_line = list(upper_line)
-    # upper_line[0] = '/'
-    # upper_line.insert(-1, '-')
-    # upper_line[-1] = '\\'
-    #
-    #
-    # print("".join(upper_line))
-    # print(''.join(header))
-    #
-    # upper_line[0] = '|'
-    # upper_line[-1] = '|'
-    # print("".join(upper_line))
-    #
-    # for item in table:
-    #     printed_table.append(item)
-    #
-    #
-    # for elem in printed_table:
-    #     print('|'+"  |  ".join(elem)+'|')
+
 
 def print_result(result, label):
     """
