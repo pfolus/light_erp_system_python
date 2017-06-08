@@ -16,8 +16,6 @@ import ui
 import data_manager
 # common module
 import common
-# copy module
-import copy
 
 
 def start_module():
@@ -184,10 +182,9 @@ def get_lowest_price_item_id(table):
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
 
     sold_items = []
-    table2 = table
+    temp_table = [x[:] for x in table]
 
-
-    for item in table2:
+    for item in temp_table:
         game_year = int(item[5])
         game_month = int(item[3])
         game_day = int(item[4])
@@ -221,7 +218,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
     for x in range(2,6):
         for i in sold_items:
-            i[x] = int(i[x])
             i[x] = int(i[x])
 
     return sold_items

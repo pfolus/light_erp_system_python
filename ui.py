@@ -29,6 +29,15 @@ def print_table(table, title_list):
         This function doesn't return anything it only prints to console.
     """
 
+    #checking for the longest #2 title:
+    title2_width = 0
+    for item in table:
+        if len(item[1]) > title2_width:
+            title2_width = len(item[1])
+    print(title2_width)
+
+
+
     header = ['|']
     for item in title_list:
         header.append('   ' + item + '   |')
