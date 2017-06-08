@@ -1,6 +1,7 @@
 # data structure:
 # id: string
-#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# Unique and random generated (at least 2 special char()expect: ';'),
+# 2 number, 2 lower and 2 upper case letter)
 # title: string
 # manufacturer: string
 # price: number (dollars)
@@ -17,6 +18,16 @@ import common
 
 
 def choose(table):
+    '''
+    Asks user to choose a number of special feature in this module
+    Gets inputs needed to run chosen function
+    User may exit this module by typing '0'
+
+
+    Returns:
+        table = list of lists
+        option = string
+    '''
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -44,12 +55,18 @@ def choose(table):
 
 
 def handle_menu():
+    '''
+    Prints name of module name and numbered names of functions
+
+    Returns:
+        None
+    '''
     options = ["Show table",
                "Add",
                "Remove",
                "Update",
                "Get counts by manufacturers",
-               "Get average by manufacturer",]
+               "Get average by manufacturer"]
 
     ui.print_menu("Store Module", options, "Return to menu")
 
@@ -73,7 +90,7 @@ def start_module():
 
 def show_table(table):
     """
-    Display a table
+    Displays a table with records given in table
 
     Args:
         table: list of lists to be displayed.
@@ -82,7 +99,8 @@ def show_table(table):
         None
     """
     # id: string
-    #     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+    # Unique and random generated (at least 2 special char()expect: ';'),
+    # 2 number, 2 lower and 2 upper case letter)
     # title: string
     # manufacturer: string
     # price: number (dollars)
@@ -167,7 +185,7 @@ def update(table, id_):
 
         while not new_data[2].isdigit() or not new_data[3].isdigit():
             new_data = ui.get_inputs(list_labels, 'Provide data: ')
-            
+
         new_data.insert(0, id_[0])
 
         for i in range(len(table)):
@@ -179,14 +197,17 @@ def update(table, id_):
     return table
 
 
-# special functions:
-# ------------------
-
-# the question: How many different kinds of game are available of each manufacturer?
-# return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
+    """
+    Gives amount of games by all manufacturers
 
-    #getting a list of manufacturers
+    Args:
+        table: list in which we look for games
+
+    Returns:
+        dictionary with manufacturers names as keys
+        and amount of games as values
+    """
     manufacturers = []
     for item in table:
         if item[2] not in manufacturers:
@@ -204,17 +225,24 @@ def get_counts_by_manufacturers(table):
     return manufacturers_games
 
 
-# the question: What is the average amount of games in stock of a given manufacturer?
-# return type: number
 def get_average_by_manufacturer(table, manufacturer):
+    """
+    Gives average amount of games in stok by manufacturer
 
-    games_counter = 0
-    games_types = 0
+    Args:
+        table: list in which we look for games
+        manufacturer: user's input - manufacturer name
+
+    Returns:
+        number: average amount of games by manufactuer
+    """
+    games_sum = 0
+    games_occurance = 0
     for item in table:
         if item[2] == manufacturer:
-            games_counter += int(item[4])
-            games_types += 1
+            games_sum += int(item[4])
+            games_occurance += 1
 
-    average_amount = games_counter / games_types
+    average_amount = games_sum / games_occurance
 
     return average_amount

@@ -1,6 +1,7 @@
 # data structure:
 # id: string
-#     Unique and randomly generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+#     Unique and randomly generated (at least 2 special char()expect: ';'),
+# 2 number, 2 lower and 2 upper case letter)
 # month: number
 # day: number
 # year: number
@@ -16,6 +17,7 @@ import ui
 import data_manager
 # common module
 import common
+
 
 def start_module():
     """
@@ -39,7 +41,12 @@ def start_module():
 
 
 def handle_menu():
+    '''
+    Prints name of module name and numbered names of functions
 
+    Returns:
+        None
+    '''
     menu_name = 'Accounting Manager:'
     menu_options = ['Show records', 'Add a record',
                     'Remove a record', 'Update a record',
@@ -49,6 +56,16 @@ def handle_menu():
 
 
 def choose(table):
+    '''
+    Asks user to choose a number of special feature in this module
+    Gets inputs needed to run chosen function
+    User may exit this module by typing '0'
+
+
+    Returns:
+        table = list of lists
+        option = string
+    '''
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -76,7 +93,7 @@ def choose(table):
 
 def show_table(table):
     """
-    Display a table
+    Displays a table with records given in table
 
     Args:
         table: list of lists to be displayed.
@@ -102,7 +119,9 @@ def add(table):
     possible_types = ['in', 'out']
     inputs = data_names[:]
 
-    while not inputs[0].isdigit() or not inputs[1].isdigit() or not inputs[2].isdigit() or inputs[3] not in possible_types or not inputs[4].isdigit():
+    while not inputs[0].isdigit() or not inputs[1].isdigit()\
+            or not inputs[2].isdigit() or inputs[3] not in possible_types\
+            or not inputs[4].isdigit():
         inputs = ui.get_inputs(data_names, 'Adding new record:')
 
     id_ = common.generate_random(table)
@@ -147,7 +166,10 @@ def update(table, id_):
     possible_types = ['in', 'out']
     new_data = data_labels[:]
 
-    while not new_data[0].isdigit() or not new_data[1].isdigit() or not new_data[2].isdigit() or new_data[3] not in possible_types or not new_data[4].isdigit():
+    while not new_data[0].isdigit() or not new_data[1].isdigit()\
+            or not new_data[2].isdigit() or new_data[3] not in possible_types\
+            or not new_data[4].isdigit():
+
         new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
 
     new_data.insert(0, id_[0])
@@ -158,14 +180,14 @@ def update(table, id_):
     return table
 
 
-
-# special functions:
-# ------------------
-
-# the question: Which year has the highest profit? (profit=in-out)
-# return the answer (number)
 def which_year_max(table):
+    '''
+    Function checks every record with profit (labeled as 'in')
+    Returns the year with highest profit
 
+    Returns:
+        year_max = int
+    '''
     profit_years = []
     year_max = 0
     biggest_profit = 0
@@ -180,9 +202,19 @@ def which_year_max(table):
     return int(year_max)
 
 
-# the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
-# return the answer (number)
 def avg_amount(table, year):
+    '''
+    Function checks records from the date provided by user
+    Every in and out value is summed, and divided by /
+    amount of logs from provided year, giving an average profit
+
+    Args:
+        table: list with records
+        year: ueser's input turned to integer
+
+    Returns:
+        avg_profit = int
+    '''
     profit = 0
     data_of_given_year = []
 

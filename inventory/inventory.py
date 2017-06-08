@@ -1,6 +1,7 @@
 # data structure:
 # id: string
-#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# Unique and random generated (at least 2 special char()expect: ';'),
+# 2 number, 2 lower and 2 upper case letter)
 # name: string
 # manufacturer: string
 # purchase_date: number (year)
@@ -18,6 +19,16 @@ import common
 
 
 def choose(table):
+    '''
+    Asks user to choose a number of special feature in this module
+    Gets inputs needed to run chosen function
+    User may exit this module by typing '0'
+
+
+    Returns:
+        table = list of lists
+        option = string
+    '''
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -40,6 +51,12 @@ def choose(table):
 
 
 def handle_menu():
+    '''
+    Prints name of module name and numbered names of functions
+
+    Returns:
+        None
+    '''
     options = ["Show table",
                "Add console",
                "Remove console",
@@ -69,7 +86,7 @@ def start_module():
 
 def show_table(table):
     """
-    Display a table
+    Displays a table with records given in table
 
     Args:
         table: list of lists to be displayed.
@@ -161,14 +178,16 @@ def update(table, id_):
     return table
 
 
-# special functions:
-# ------------------
-
-# the question: Which items have not exceeded their durability yet?
-# return type: list of lists (the inner list contains the whole row with their actual data types)
-#
-# @table: list of lists
 def get_available_items(table):
+    """
+    Picks available consoles based on their durability
+
+    Args:
+        table: list in which we look for records
+
+    Returns:
+        list with available items
+    """
     available_items_list = []
     differences_list = [2017 - int(item[3]) for item in table]
     for i in range(len(differences_list)):
@@ -180,12 +199,17 @@ def get_available_items(table):
     return available_items_list
 
 
-# the question: What are the average durability times for each manufacturer?
-# return type: a dictionary with this structure: { [manufacturer] : [avg] }
-#
-# @table: list of lists
 def get_average_durability_by_manufacturers(table):
-    durability_by_manufacturers = {}
+    """
+    Counts average durability by manufacturers based on their all consoles
+
+    Args:
+        table: list in which we look for consoles
+
+    Returns:
+        dictionary with average durability for each manufacturer
+    """
+    durability_dict = {}
     manufacturers_list = [item[2] for item in table]
     exclusive_manufacturers = list(set(manufacturers_list))
     for i in range(len(exclusive_manufacturers)):
@@ -195,5 +219,5 @@ def get_average_durability_by_manufacturers(table):
             if exclusive_manufacturers[i] == manufacturers_list[j]:
                 occurance += 1
                 durability_sum += int(table[j][4])
-        durability_by_manufacturers[exclusive_manufacturers[i]] = durability_sum / occurance
-    return durability_by_manufacturers
+        durability_dict[exclusive_manufacturers[i]] = durability_sum / occurance
+    return durability_dict

@@ -1,6 +1,7 @@
 # data structure:
 # id: string
-#     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# Unique and random generated (at least 2 special char()expect: ';'), 2 number,
+# 2 lower and 2 upper case letter)
 # name: string
 # birth_date: number (year)
 
@@ -16,6 +17,16 @@ import common
 
 
 def choose(table):
+    '''
+    Asks user to choose a number of special feature in this module
+    Gets inputs needed to run chosen function
+    User may exit this module by typing '0'
+
+
+    Returns:
+        table = list of lists
+        option = string
+    '''
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -38,6 +49,12 @@ def choose(table):
 
 
 def handle_menu():
+    '''
+    Prints name of module name and numbered names of functions
+
+    Returns:
+        None
+    '''
     options = ["Show table",
                "Add person",
                "Remove person",
@@ -67,7 +84,7 @@ def start_module():
 
 def show_table(table):
     """
-    Display a table
+    Displays a table with records given in table
 
     Args:
         table: list of lists to be displayed.
@@ -140,7 +157,7 @@ def update(table, id_):
     if exists:
         for i in range(len(table)):
             if table[i][0] == id_[0]:
-                
+
                 data_names = ['Name', 'Year']
                 inputs = data_names[:]
 
@@ -154,12 +171,16 @@ def update(table, id_):
     return table
 
 
-# special functions:
-# ------------------
-
-# the question: Who is the oldest person ?
-# return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
+    """
+    Picks people who were born the earliest
+
+    Args:
+        table: list in which we look for oldest people
+
+    Returns:
+        list with oldest people
+    """
 
     so_rted_years = common.bubble_so_rt([item[2] for item in table])
     oldest_people = [item[1] for item in table if item[2] == so_rted_years[0]]
@@ -167,9 +188,17 @@ def get_oldest_person(table):
     return oldest_people
 
 
-# the question: Who is the closest to the average age ?
-# return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
+    """
+    Counts average age and picks people whos birth year is
+    closest to the average
+
+    Args:
+        table: list in which we look for people closest to the average age
+
+    Returns:
+        list with people closest to the average age
+    """
     average_year = common.get_average_number([int(item[2]) for item in table])
     differences_list = [abs(int(item[2]) - average_year) for item in table]
     minimum_difference = common.get_min_number(differences_list)

@@ -1,6 +1,7 @@
 # data structure:
 # id: string
-#     Unique and randomly generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
+# Unique and randomly generated (at least 2 special char()expect: ';'),
+# 2 number, 2 lower and 2 upper case letter)
 # name: string
 # email: string
 # subscribed: boolean (Is she/he subscribed to the newsletter? 1/0 = yes/not)
@@ -15,7 +16,18 @@ import data_manager
 # common module
 import common
 
+
 def choose(table):
+    '''
+    Asks user to choose a number of special feature in this module
+    Gets inputs needed to run chosen function
+    User may exit this module by typing '0'
+
+
+    Returns:
+        table = list of lists
+        option = string
+    '''
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
@@ -38,12 +50,18 @@ def choose(table):
 
 
 def handle_menu():
+    '''
+    Prints name of module name and numbered names of functions
+
+    Returns:
+        None
+    '''
     options = ["Show table",
                "Add",
                "Remove",
                "Update",
                "Get longest name id",
-               "Get subscribed emails(table)",]
+               "Get subscribed emails(table)"]
 
     ui.print_menu("Customer Relationship Management", options, "Return to menu")
 
@@ -65,10 +83,9 @@ def start_module():
     data_manager.write_table_to_file("crm/customers.csv", table)
 
 
-
 def show_table(table):
     """
-    Display a table
+    Displays a table with records given in table
 
     Args:
         table: list of lists to be displayed.
@@ -78,7 +95,6 @@ def show_table(table):
     """
     title_list = ["ID", "Name", "E-mail", "Subscribed"]
     ui.print_table(table, title_list)
-
 
 
 def add(table):
@@ -93,7 +109,8 @@ def add(table):
     """
     generated = common.generate_random(table)
 
-    list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0 = no]']
+    list_labels = ['Name: ', 'Email: ',
+                   'Is she/he subscribed to the newsletter? [1 = yes / 0 = no]']
 
     possible_types = ['0', '1']
     inputs = list_labels[:]
@@ -150,7 +167,8 @@ def update(table, id_):
 
     if exist:
 
-        list_labels = ['Name: ', 'Email: ', 'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
+        list_labels = ['Name: ', 'Email: ',
+                       'Is she/he subscribed to the newsletter? [1 = yes / 0=no]']
         possible_types = ['0', '1']
         new_data = list_labels[:]
 
@@ -167,14 +185,16 @@ def update(table, id_):
     return table
 
 
-# special functions:
-# ------------------
-
-
-# the question: What is the id of the customer with the longest name ?
-# return type: string (id) - if there are more than one longest name, return the first by descending alphabetical order
 def get_longest_name_id(table):
+    """
+    Picks id of customer with longest name
 
+    Args:
+        table: list in which we look for customers
+
+    Returns:
+        string: id of person with longes name
+    """
     longest_name = ''
     for item in table:
         if len(item[1]) > len(longest_name):
@@ -187,10 +207,16 @@ def get_longest_name_id(table):
     return longest_name_id
 
 
-# the question: Which customers has subscribed to the newsletter?
-# return type: list of strings (where string is like email+separator+name, separator=";")
 def get_subscribed_emails(table):
+    '''
+    Picks e-mails which subscribed
 
+    Args:
+        table: list in which we look for emails
+
+    Returns:
+        list with subscribed e-mails
+    '''
     subscription_list = []
     for item in table:
         if item[3] == '1':
