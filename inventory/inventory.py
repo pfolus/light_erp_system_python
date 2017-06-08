@@ -100,7 +100,7 @@ def add(table):
 
     while not inputs[2].isdigit() or not inputs[3].isdigit():
         inputs = ui.get_inputs(list_labels, "Enter console info")
-        
+
     id_ = common.generate_random(table)
     inputs.insert(0, id_)
     table.append(inputs)
@@ -148,7 +148,12 @@ def update(table, id_):
     if exists:
         for i in range(len(table)):
             if table[i][0] == id_[0]:
-                inputs = ui.get_inputs(list_labels, "Enter console info")
+
+                inputs = list_labels[:]
+
+                while not inputs[2].isdigit() or not inputs[3].isdigit():
+                    inputs = ui.get_inputs(list_labels, "Enter console info")
+
                 inputs.insert(0, id_[0])
                 table[i] = inputs
     else:
