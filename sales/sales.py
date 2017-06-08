@@ -145,8 +145,13 @@ def update(table, id_):
         table with updated record
     """
 
-    data_labels = ['Title: ', 'Price: ', 'Month: ', 'Day: ', 'Year: ']
-    new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
+    data_labels = ['Title', 'Price', 'Month', 'Day', 'Year']
+
+    new_data = data_labels[:]
+
+    while not new_data[1].isdigit() or not new_data[2].isdigit() or not new_data[3].isdigit() or not new_data[4].isdigit():
+        new_data = ui.get_inputs(data_labels, ('Change data of %s record:' % id_[0]))
+
     new_data.insert(0, id_[0])
 
     for i in range(len(table)):

@@ -160,8 +160,14 @@ def update(table, id_):
             exist = True
 
     if exist:
+
         list_labels = ['Title: ', 'Manufacturer: ', 'Price: ', 'Number in stock: ']
-        new_data = ui.get_inputs(list_labels, 'Enter customers new data: ')
+
+        new_data = list_labels[:]
+
+        while not new_data[2].isdigit() or not new_data[3].isdigit():
+            new_data = ui.get_inputs(list_labels, 'Provide data: ')
+            
         new_data.insert(0, id_[0])
 
         for i in range(len(table)):
