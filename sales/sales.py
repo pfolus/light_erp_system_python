@@ -68,7 +68,13 @@ def choose(table):
     elif option == "6":
         inputs = ['Month from: ', 'Day from: ', 'Year from: ',
                   'Month to: ', 'Day to: ', 'Year to: ']
-        dates = ui.get_inputs(inputs, 'Items sold between dates')
+        dates = inputs[:]
+        while not dates[0].isdigit() or not dates[1].isdigit()\
+            or not dates[2].isdigit() or not dates[3].isdigit()\
+                or not dates[4].isdigit() or not dates[5].isdigit():
+
+            dates = ui.get_inputs(inputs, 'Items sold between dates')
+
         sold_items = get_items_sold_between(table, dates[0], dates[1], dates[2], dates[3], dates[4], dates[5])
         ui.print_result(sold_items, 'Items sold between dates')
     return table, option
