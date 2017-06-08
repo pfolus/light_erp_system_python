@@ -206,7 +206,7 @@ def get_lowest_price_item_id(table):
     if len(lowest_price_item_id) > 1:
         so_rted_game_names = common.get_max_number(list(game_names_with_id.values()))
         for key, value in game_names_with_id.items():
-            if value == so_rted_game_names[0]:
+            if value == so_rted_game_names:
                 return key
     else:
         return lowest_price_item_id[0]
