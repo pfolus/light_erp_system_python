@@ -41,7 +41,7 @@ def start_module():
 
 def handle_menu():
 
-    menu_name = 'Sales Manager:'
+    menu_name = 'Sales Manager'
     menu_options = ['Show records', 'Add a record',
                     'Remove a record', 'Update a record',
                     'Lowest price game', 'Items sold between dates']
@@ -68,9 +68,9 @@ def choose(table):
     elif option == "6":
         inputs = ['Month from: ', 'Day from: ', 'Year from: ',
                   'Month to: ', 'Day to: ', 'Year to: ']
-        dates = ui.get_inputs(inputs, 'Items sold between dates:')
+        dates = ui.get_inputs(inputs, 'Items sold between dates')
         sold_items = get_items_sold_between(table, dates[0], dates[1], dates[2], dates[3], dates[4], dates[5])
-        ui.print_result(sold_items, 'Items sold between dates:')
+        ui.print_result(sold_items, 'Items sold between dates')
     return table, option
 
 def show_table(table):
@@ -172,9 +172,9 @@ def get_lowest_price_item_id(table):
 
     if len(lowest_price_item_id) > 1:
         lowest_price_item_id = common.get_max_number(lowest_price_item_id)
-        return lowest_price_item_id
+        return lowest_price_item_id[0]
     else:
-        return lowest_price_item_id
+        return lowest_price_item_id[0]
 
 
 # the question: Which items are sold between two given dates ? (from_date < sale_date < to_date)
